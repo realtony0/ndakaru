@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>boutique — mbedüm:ndakaru</title>
+<meta name="description" content="Toutes les pièces mbedüm ndakaru : t-shirts et hoodies sérigraphiés inspirés de Dakar. Tailles M à 4XL, blanc, noir, beige.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="bar" data-bar>
+  <div class="bar__track">
+    <div class="bar__msg" data-bar-msg><span>profitez de réductions exceptionnelles</span><span aria-hidden="true">→</span></div>
+  </div>
+  <button class="bar__close" type="button" data-bar-close aria-label="fermer">✕</button>
+</div>
+
+<header class="header header--solid" data-header>
+  <nav class="header__nav">
+    <button class="burger" type="button" data-open="data-menu">menu</button>
+    <a class="is-active" href="boutique.html">boutique</a>
+    <a href="boutique.html?cat=gainde">gaïndé</a>
+    <a href="boutique.html?cat=tshirts">t-shirts</a>
+    <a href="boutique.html?cat=hoodies">hoodies</a>
+    <a href="marque.html">marque</a>
+  </nav>
+  <a class="logo" href="index.html">mbedüm:ndakaru</a>
+  <div class="header__utils">
+    <a href="contact.html">contact</a>
+    <button type="button" data-open="data-search">recherche</button>
+    <button type="button" data-open="data-cart-drawer">panier <span class="count" data-cart-count></span></button>
+  </div>
+</header>
+
+<main>
+  <div class="pagehead">
+    <img src="assets/img/site/look-taxi.jpg" alt="T-shirts mbedüm ndakaru posés sur le capot d'un taxi jaune à Dakar" fetchpriority="high">
+    <div class="pagehead__body">
+      <h1 class="pagehead__title" data-shop-title>boutique:tout</h1>
+      <p class="pagehead__sub">t-shirts et hoodies sérigraphiés — coupes unisexes, du M au 4XL.</p>
+    </div>
+  </div>
+
+  <div class="filters" style="margin-top:0">
+    <button class="chip is-on" type="button" data-cat="tout">tout</button>
+    <button class="chip" type="button" data-cat="gainde">gaïndé</button>
+    <button class="chip" type="button" data-cat="tshirts">t-shirts</button>
+    <button class="chip" type="button" data-cat="hoodies">hoodies</button>
+    <button class="chip" type="button" data-cat="promo">promo</button>
+    <span class="filters__spacer"></span>
+    <span class="filters__count" data-shop-count></span>
+    <select class="select" data-sort aria-label="trier">
+      <option value="defaut">tri : nouveautés</option>
+      <option value="prix-asc">prix croissant</option>
+      <option value="prix-desc">prix décroissant</option>
+      <option value="nom">nom (a → z)</option>
+    </select>
+  </div>
+
+  <section class="section section--tight">
+    <div class="grid" data-shop-grid></div>
+  </section>
+
+  <section class="member">
+    <div class="member__inner">
+      <div>
+        <h2 class="member__title">une question sur une taille ?</h2>
+        <ul class="member__list">
+          <li>coupes unisexes oversize, du M au 4XL</li>
+          <li>blanc, noir et beige sur la plupart des pièces</li>
+          <li>livraison à Dakar et dans les régions</li>
+          <li>paiement à la livraison</li>
+        </ul>
+      </div>
+      <div class="form">
+        <a class="btn btn--wide" href="contact.html">nous:écrire</a>
+        <a class="btn btn--wide" href="https://wa.me/221789271531" target="_blank" rel="noopener">whatsapp</a>
+        <p class="form__note">+221 78 927 15 31 · contact@mbedumndakaru.com</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__cols">
+    <div class="footer__brand">
+      <div class="footer__word">mbedüm:ndakaru</div>
+      <div class="footer__script">nous sommes là pour vous</div>
+      <p class="hero__meta" style="opacity:.6;color:var(--ink-60)">Dakar, Sénégal — depuis 1988</p>
+    </div>
+    <div>
+      <h4>boutique</h4>
+      <ul>
+        <li><a href="boutique.html">tout</a></li>
+        <li><a href="boutique.html?cat=gainde">gaïndé</a></li>
+        <li><a href="boutique.html?cat=tshirts">t-shirts</a></li>
+        <li><a href="boutique.html?cat=hoodies">hoodies</a></li>
+        <li><a href="boutique.html?cat=promo">promo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>aide</h4>
+      <ul>
+        <li><a href="contact.html">contact</a></li>
+        <li><a href="marque.html">la marque</a></li>
+        <li><a href="contact.html#livraison">livraison</a></li>
+        <li><a href="contact.html#retours">retours</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>suivez-nous</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/mbedum_ndakaru" target="_blank" rel="noopener">instagram</a></li>
+        <li><a href="https://www.tiktok.com/@mbedum_ndakaru" target="_blank" rel="noopener">tiktok</a></li>
+        <li><a href="mailto:contact@mbedumndakaru.com">contact@mbedumndakaru.com</a></li>
+        <li><a href="tel:+221789271531">+221 78 927 15 31</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© <span data-year>2025</span> mbedüm ndakaru. tous droits réservés.</span>
+    <span>paiement à la livraison · Dakar &amp; régions</span>
+  </div>
+</footer>
+
+<div class="scrim" data-scrim></div>
+
+<aside class="drawer" data-cart-drawer aria-label="panier">
+  <div class="drawer__head">
+    <span>panier <span class="count" data-cart-count></span></span>
+    <button type="button" data-close aria-label="fermer">✕</button>
+  </div>
+  <div class="drawer__body" data-cart-body></div>
+  <div class="drawer__foot">
+    <div class="drawer__total"><span>total</span><span data-cart-total>0 FCFA</span></div>
+    <button class="btn btn--fill btn--wide" type="button" data-checkout disabled>commander:whatsapp</button>
+    <p class="drawer__note">frais de livraison confirmés lors de la commande</p>
+  </div>
+</aside>
+
+<nav class="menu" data-menu aria-label="menu">
+  <div class="drawer__head">
+    <span>menu</span>
+    <button type="button" data-close aria-label="fermer">✕</button>
+  </div>
+  <div class="menu__body">
+    <a href="index.html">accueil</a>
+    <a href="boutique.html">boutique</a>
+    <a href="boutique.html?cat=gainde">gaïndé</a>
+    <a href="boutique.html?cat=tshirts">t-shirts</a>
+    <a href="boutique.html?cat=hoodies">hoodies</a>
+    <a href="boutique.html?cat=promo">promo</a>
+    <a href="marque.html">marque</a>
+    <a href="contact.html">contact</a>
+  </div>
+</nav>
+
+<div class="search" data-search aria-label="recherche">
+  <div class="search__bar">
+    <input class="search__input" type="search" placeholder="rechercher une pièce" aria-label="rechercher">
+    <button type="button" data-close aria-label="fermer">✕</button>
+  </div>
+  <div class="search__results" data-search-results></div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="data/products.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

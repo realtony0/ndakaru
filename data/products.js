@@ -1,0 +1,497 @@
+window.PRODUCTS = [
+  {
+    "slug": "gainde-t-shirt",
+    "title": "Gaïndé (T-shirt)",
+    "category": "tshirts",
+    "collection": "gainde",
+    "price": 10000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Le maillot Gaïndé — le Lion.\n\nÉcusson Sunugaal FSF, monogramme Maison Ndakaru sur le cœur, lettrage ton sur ton. Coupe maillot, coton lourd, épaules tombantes.\n\nTrois coloris : noir, crème et blanc.",
+    "images": [
+      "assets/img/products/gainde-noir-01.jpg",
+      "assets/img/products/gainde-creme-01.jpg",
+      "assets/img/products/gainde-duo-01.jpg",
+      "assets/img/products/gainde-blanc-01.jpg",
+      "assets/img/products/gainde-noir-02.jpg",
+      "assets/img/products/gainde-creme-02.jpg",
+      "assets/img/products/gainde-noir-04.jpg",
+      "assets/img/products/gainde-creme-03.jpg",
+      "assets/img/products/gainde-noir-03.jpg",
+      "assets/img/products/gainde-duo-02.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Noir",
+      "Crème",
+      "Blanc"
+    ],
+    "sourceSlug": null,
+    "colorImages": {
+      "Noir": "assets/img/products/gainde-noir-01.jpg",
+      "Crème": "assets/img/products/gainde-creme-01.jpg",
+      "Blanc": "assets/img/products/gainde-blanc-01.jpg"
+    }
+  },
+  {
+    "slug": "sunugaal-t-shirt",
+    "title": "Sunugaal (T-shirt)",
+    "category": "tshirts",
+    "collection": "gainde",
+    "price": 10000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Dos imprimé : le stade, les drapeaux, la foule.\n\n« Là où les Lions passent, l'histoire s'écrit. »\n\nSérigraphie grand format sur coton crème.",
+    "images": [
+      "assets/img/products/sunugaal-dos-02.jpg",
+      "assets/img/products/sunugaal-dos-01.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Crème"
+    ],
+    "sourceSlug": null,
+    "colorImages": {
+      "Crème": "assets/img/products/sunugaal-dos-02.jpg"
+    }
+  },
+  {
+    "slug": "maaaam-tshirt",
+    "title": "Maaaam (Tshirt)",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "",
+    "images": [
+      "assets/img/products/a4530b4e-c01b-4538-b2c9-46e2eb274839.jpg",
+      "assets/img/products/9f19128a-194e-49cd-ba61-e91d8fda6adc.jpg",
+      "assets/img/products/ce6ff982-0e7b-44c6-bb15-436a82eddb69.jpg",
+      "assets/img/products/5be5a1df-cb87-4380-a81f-dcd9ed1b8553.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Beige",
+      "Blanc",
+      "Noir"
+    ],
+    "sourceSlug": "maaaam-tshirt1",
+    "collection": "heritage"
+  },
+  {
+    "slug": "ndakaru-bu-jekk-tshirt",
+    "title": "Ndakaru bu jëkk (Tshirt)",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "",
+    "images": [
+      "assets/img/products/90f56d03-e5e0-4cab-974d-ef32b6fc5c7b.jpg",
+      "assets/img/products/889a29fe-1504-42dd-9663-d059215674ab.jpg",
+      "assets/img/products/5706efbf-ad8c-4c21-a4d4-6efc0d29fe37.jpg",
+      "assets/img/products/9a73dca0-408e-4afd-bb39-a7a34f61d6a4.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Beige",
+      "Blanc",
+      "Noir"
+    ],
+    "sourceSlug": "ndakaru-bu-jekk-tshirt1",
+    "collection": "heritage"
+  },
+  {
+    "slug": "ndortel-tshirt",
+    "title": "Ndortel (Tshirt)",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "",
+    "images": [
+      "assets/img/products/fa8f8933-b75e-4510-9102-31a9e88eb5c2.jpg",
+      "assets/img/products/2336d2cc-31d6-4524-ae45-baa26969c77d.jpg",
+      "assets/img/products/6860a8b1-d95f-4a6e-a94d-e5b9148018ac.jpg",
+      "assets/img/products/fbe08622-174a-4307-83a1-dc74d6ce669a.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Beige",
+      "Blanc",
+      "Noir"
+    ],
+    "sourceSlug": "ndortel-tshirt1",
+    "collection": "heritage"
+  },
+  {
+    "slug": "kermel-hoodies",
+    "title": "KERMEL (Hoodies)",
+    "category": "hoodies",
+    "price": 15000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Un hommage vintage au Marché Kermel, symbole du Dakar historique. Une pièce culturelle signée MBEDÜM NDAKARU.",
+    "images": [
+      "assets/img/products/75f981be-6734-49a8-b4eb-656be9a6f133.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "kermel-hoodies-un-hommage-vintage-au-marche-kermel-symbole-du-dakar-historique-une-piece-culturelle-signee-mbedum-ndakaru",
+    "collection": "heritage"
+  },
+  {
+    "slug": "kermel-t-shirt",
+    "title": "KERMEL (T-SHIRT)",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Un hommage vintage au Marché Kermel, symbole du Dakar historique. Une pièce culturelle signée MBEDÜM NDAKARU.",
+    "images": [
+      "assets/img/products/c62b9eec-5bf8-4e37-90c5-a386fbbd3ff8.jpg",
+      "assets/img/products/ea8aba72-56af-4092-8b17-68c2a88bc585.jpg",
+      "assets/img/products/6eb121cf-1dec-49dc-9de2-26a8aa7d42c4.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "kermel-t-shirt-un-hommage-vintage-au-marche-kermel-symbole-du-dakar-historique-une-piece-culturelle-signee-mbedum-ndakaru",
+    "collection": "heritage"
+  },
+  {
+    "slug": "teggu-hoodies",
+    "title": "TËGGU (Hoodies)",
+    "category": "hoodies",
+    "price": 15000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "L’héritage de Ndakaru, porté avec fierté.",
+    "images": [
+      "assets/img/products/c08742ec-64f3-4181-83d3-fed1cf4eff06.jpg",
+      "assets/img/products/9d07262e-4565-4267-a119-da422922dc57.jpg",
+      "assets/img/products/03c6fee9-9f8e-457c-a3bd-844d1d0eae06.jpg",
+      "assets/img/products/5a0baa42-223f-44f0-8aea-fdc230fdde77.jpg",
+      "assets/img/products/4de538b1-fb5e-4beb-a42c-568c30c4d68b.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "teggu-hoodies-lheritage-de-ndakaru-porte-avec-fierte",
+    "collection": "heritage"
+  },
+  {
+    "slug": "teggu-t-shirt",
+    "title": "TËGGU (T-shirt)",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "L’héritage de Ndakaru, porté avec fierté.",
+    "images": [
+      "assets/img/products/64dfc24e-eab9-433a-b3f0-6761c42d7d77.jpg",
+      "assets/img/products/85095377-42e9-4c77-ad9c-1ee7c7ee934a.jpg",
+      "assets/img/products/371fcca3-2443-4ea9-85b7-01267115bec2.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "teggu-t-shirt-lheritage-de-ndakaru-porte-avec-fierte",
+    "collection": "heritage"
+  },
+  {
+    "slug": "ndakaru-cards-vintage-tee-hoodies",
+    "title": "Ndakaru Cards Vintage Tee Hoodies",
+    "category": "hoodies",
+    "price": 15000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "",
+    "images": [
+      "assets/img/products/e719f430-c702-4c56-946f-5e21e079af71.jpg",
+      "assets/img/products/822e50be-a320-4d91-9c19-5fe44c7fb44b.jpg",
+      "assets/img/products/878eaefb-df94-4932-9096-f9c00c9970bf.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "ndakaru-cards-vintage-tee-hoodies",
+    "collection": "heritage"
+  },
+  {
+    "slug": "ndakaru-cards-vintage-tee-tshirt",
+    "title": "Ndakaru Cards Vintage Tee tshirt",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "",
+    "images": [
+      "assets/img/products/88d3a439-2e95-45e1-aba5-6b33773baf1a.jpg",
+      "assets/img/products/68483c39-547f-4801-945b-1074a27520e0.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "ndakaru-cards-vintage-tee-tshirt",
+    "collection": "heritage"
+  },
+  {
+    "slug": "t-shirt-mariam-dicoh",
+    "title": "T-shirt “Mariam Dicoh”",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "Inspiré de la première femme chimiste de Côte d’Ivoire, représentée sur la pièce de 25 francs CFA.\n\nUne création vintage qui rend hommage à la science, à la culture et à l’élégance africaine.\n\nFierté. Héritage. Savoir.",
+    "images": [
+      "assets/img/products/27706770-bf85-4e7b-8218-33d5d9b53592.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "t-shirt-mariam-dicoh-",
+    "collection": "heritage"
+  },
+  {
+    "slug": "t-shirt-renaissance-x-teranga",
+    "title": "T-shirt Renaissance x Teranga",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "Avec ses teintes douces et son graphisme végétal, ce modèle rend hommage à la Renaissance africaine et à l’âme de la Teranga.\n\nDakar, ville d’histoire et d’élégance, y est représentée comme une terre d’équilibre entre mémoire et fierté.\n\nIci naît l’élégance inspirée par l’Afrique.",
+    "images": [
+      "assets/img/products/15a2c1e7-57b8-47d0-bcbe-aa47862f5a08.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "-t-shirt-renaissance-x-teranga",
+    "collection": "heritage"
+  },
+  {
+    "slug": "t-shirt-dakar-heritage-mosquee-gare",
+    "title": "T-shirt Dakar Heritage (Mosquée + Gare)",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "Ce modèle unit deux symboles puissants de Dakar : la Mosquée de la Divinité et la Gare de Dakar.\n\nUn mariage d’architecture, de foi et d’élégance.\n\nUn hommage à la grandeur et à la beauté de la capitale.",
+    "images": [
+      "assets/img/products/f05fee1c-0ffb-4efb-8f8a-4f69d961bf9f.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "vtements-uniques",
+    "collection": "heritage"
+  },
+  {
+    "slug": "t-shirt-chambre-de-commerce-noir-gold",
+    "title": "T-shirt Chambre de Commerce (Noir/Gold)",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "Symbole de fierté et d’histoire, ce design rend hommage à l’un des plus anciens monuments de Dakar : la Chambre de Commerce.\n\nSon style vintage et doré capture la noblesse du patrimoine sénégalais — une pièce qui relie tradition et modernité.\n\nUn hommage à la ville où tout commence.",
+    "images": [
+      "assets/img/products/2c25cae0-f7a2-4928-b6fd-c66cdb08cf6c.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "mode-dakar",
+    "collection": "heritage"
+  },
+  {
+    "slug": "t-shirt-goree-renaissance",
+    "title": "T-shirt Gorée Renaissance",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "Mémoire, histoire et résilience.\n\nCe modèle s’inspire de l’île de Gorée, lieu de mémoire et de renaissance. Le visuel traduit la beauté poignante d’un passé gravé dans l’océan, revisité avec une touche artistique et élégante.\n\nUn vêtement qui parle d’âme et d’identité.",
+    "images": [
+      "assets/img/products/ddedef8f-def5-4ed2-84ae-e3efe017abeb.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "vtements-uniques-2",
+    "collection": "heritage"
+  },
+  {
+    "slug": "t-shirt-senegal-sunset",
+    "title": "T-shirt Sénégal Sunset",
+    "category": "tshirts",
+    "price": 10000,
+    "compareAt": 12000,
+    "currency": "FCFA",
+    "description": "Inspiré par la côte dakaroise et la chaleur du couchant africain, ce design incarne la paix, la culture et la fierté du Sénégal.\n\nChaque détail évoque la lumière et l’énergie du pays de la Teranga.\n\nL’Afrique, là où tout commence.",
+    "images": [
+      "assets/img/products/1fa609df-be78-4a2a-b15f-c95c08c0914e.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Blanc",
+      "Noir",
+      "Beige"
+    ],
+    "sourceSlug": "vtements-de-dakar-1",
+    "collection": "heritage"
+  }
+];

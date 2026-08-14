@@ -1,0 +1,551 @@
+{
+ "assets/img/products/03c6fee9-9f8e-457c-a3bd-844d1d0eae06.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/03c6fee9-9f8e-457c-a3bd-844d1d0eae06-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/15a2c1e7-57b8-47d0-bcbe-aa47862f5a08.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/15a2c1e7-57b8-47d0-bcbe-aa47862f5a08-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/1fa609df-be78-4a2a-b15f-c95c08c0914e.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/1fa609df-be78-4a2a-b15f-c95c08c0914e-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/2336d2cc-31d6-4524-ae45-baa26969c77d.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/2336d2cc-31d6-4524-ae45-baa26969c77d-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/27706770-bf85-4e7b-8218-33d5d9b53592.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/27706770-bf85-4e7b-8218-33d5d9b53592-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/2c25cae0-f7a2-4928-b6fd-c66cdb08cf6c.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/2c25cae0-f7a2-4928-b6fd-c66cdb08cf6c-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/371fcca3-2443-4ea9-85b7-01267115bec2.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/371fcca3-2443-4ea9-85b7-01267115bec2-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/4de538b1-fb5e-4beb-a42c-568c30c4d68b.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/4de538b1-fb5e-4beb-a42c-568c30c4d68b-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/5706efbf-ad8c-4c21-a4d4-6efc0d29fe37.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/5706efbf-ad8c-4c21-a4d4-6efc0d29fe37-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/5a0baa42-223f-44f0-8aea-fdc230fdde77.jpg": {
+  "w": 1080,
+  "variants": [
+   {
+    "file": "assets/img/products/5a0baa42-223f-44f0-8aea-fdc230fdde77-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/products/5a0baa42-223f-44f0-8aea-fdc230fdde77-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/products/5be5a1df-cb87-4380-a81f-dcd9ed1b8553.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/5be5a1df-cb87-4380-a81f-dcd9ed1b8553-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/64dfc24e-eab9-433a-b3f0-6761c42d7d77.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/64dfc24e-eab9-433a-b3f0-6761c42d7d77-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/68483c39-547f-4801-945b-1074a27520e0.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/68483c39-547f-4801-945b-1074a27520e0-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/6860a8b1-d95f-4a6e-a94d-e5b9148018ac.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/6860a8b1-d95f-4a6e-a94d-e5b9148018ac-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/6eb121cf-1dec-49dc-9de2-26a8aa7d42c4.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/6eb121cf-1dec-49dc-9de2-26a8aa7d42c4-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/75f981be-6734-49a8-b4eb-656be9a6f133.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/75f981be-6734-49a8-b4eb-656be9a6f133-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/822e50be-a320-4d91-9c19-5fe44c7fb44b.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/822e50be-a320-4d91-9c19-5fe44c7fb44b-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/85095377-42e9-4c77-ad9c-1ee7c7ee934a.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/85095377-42e9-4c77-ad9c-1ee7c7ee934a-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/878eaefb-df94-4932-9096-f9c00c9970bf.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/878eaefb-df94-4932-9096-f9c00c9970bf-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/889a29fe-1504-42dd-9663-d059215674ab.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/889a29fe-1504-42dd-9663-d059215674ab-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/88d3a439-2e95-45e1-aba5-6b33773baf1a.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/88d3a439-2e95-45e1-aba5-6b33773baf1a-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/90f56d03-e5e0-4cab-974d-ef32b6fc5c7b.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/90f56d03-e5e0-4cab-974d-ef32b6fc5c7b-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/9a73dca0-408e-4afd-bb39-a7a34f61d6a4.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/9a73dca0-408e-4afd-bb39-a7a34f61d6a4-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/9d07262e-4565-4267-a119-da422922dc57.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/9d07262e-4565-4267-a119-da422922dc57-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/9f19128a-194e-49cd-ba61-e91d8fda6adc.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/9f19128a-194e-49cd-ba61-e91d8fda6adc-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/a4530b4e-c01b-4538-b2c9-46e2eb274839.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/a4530b4e-c01b-4538-b2c9-46e2eb274839-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/c08742ec-64f3-4181-83d3-fed1cf4eff06.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/c08742ec-64f3-4181-83d3-fed1cf4eff06-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/c62b9eec-5bf8-4e37-90c5-a386fbbd3ff8.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/c62b9eec-5bf8-4e37-90c5-a386fbbd3ff8-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ce6ff982-0e7b-44c6-bb15-436a82eddb69.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ce6ff982-0e7b-44c6-bb15-436a82eddb69-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ddedef8f-def5-4ed2-84ae-e3efe017abeb.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ddedef8f-def5-4ed2-84ae-e3efe017abeb-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/e719f430-c702-4c56-946f-5e21e079af71.jpg": {
+  "w": 888,
+  "variants": [
+   {
+    "file": "assets/img/products/e719f430-c702-4c56-946f-5e21e079af71-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ea8aba72-56af-4092-8b17-68c2a88bc585.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ea8aba72-56af-4092-8b17-68c2a88bc585-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/f05fee1c-0ffb-4efb-8f8a-4f69d961bf9f.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/f05fee1c-0ffb-4efb-8f8a-4f69d961bf9f-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/fa8f8933-b75e-4510-9102-31a9e88eb5c2.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/fa8f8933-b75e-4510-9102-31a9e88eb5c2-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/fbe08622-174a-4307-83a1-dc74d6ce669a.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/fbe08622-174a-4307-83a1-dc74d6ce669a-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/gainde-blanc-01.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-blanc-01-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/gainde-creme-01.jpg": {
+  "w": 933,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-creme-01-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/products/gainde-creme-01-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/products/gainde-creme-02.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-creme-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/gainde-creme-03.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-creme-03-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/gainde-duo-01.jpg": {
+  "w": 933,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-duo-01-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/products/gainde-duo-01-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/products/gainde-duo-02.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-duo-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/gainde-noir-01.jpg": {
+  "w": 933,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-noir-01-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/products/gainde-noir-01-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/products/gainde-noir-02.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-noir-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/gainde-noir-03.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-noir-03-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/gainde-noir-04.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-noir-04-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/sunugaal-dos-01.jpg": {
+  "w": 864,
+  "variants": [
+   {
+    "file": "assets/img/products/sunugaal-dos-01-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/sunugaal-dos-02.jpg": {
+  "w": 696,
+  "variants": [
+   {
+    "file": "assets/img/products/sunugaal-dos-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/site/look-atelier.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/site/look-atelier-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/site/look-container.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/site/look-container-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/site/look-dos-dakar.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/site/look-dos-dakar-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/site/look-gainde-contreplongee.jpg": {
+  "w": 1124,
+  "variants": [
+   {
+    "file": "assets/img/site/look-gainde-contreplongee-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/site/look-gainde-contreplongee-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/site/look-gainde-trio.jpg": {
+  "w": 1080,
+  "variants": [
+   {
+    "file": "assets/img/site/look-gainde-trio-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/site/look-gainde-trio-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/site/look-groupe.jpg": {
+  "w": 1080,
+  "variants": [
+   {
+    "file": "assets/img/site/look-groupe-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/site/look-groupe-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/site/look-hero.jpg": {
+  "w": 1080,
+  "variants": [
+   {
+    "file": "assets/img/site/look-hero-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/site/look-hero-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/site/look-hoodie-blanc.jpg": {
+  "w": 1080,
+  "variants": [
+   {
+    "file": "assets/img/site/look-hoodie-blanc-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/site/look-hoodie-blanc-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/site/look-hoodies-rouge.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/site/look-hoodies-rouge-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/site/look-taxi.jpg": {
+  "w": 864,
+  "variants": [
+   {
+    "file": "assets/img/site/look-taxi-400w.jpg",
+    "w": 400
+   }
+  ]
+ }
+}

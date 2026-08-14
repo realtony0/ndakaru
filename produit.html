@@ -3,36 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>produit — mbedüm:ndakaru</title>
-<meta name="description" content="Pièce mbedüm ndakaru — sérigraphie inspirée de Dakar, coton lourd, coupe unisexe.">
+<title>Produit — Mbedüm Ndakaru</title>
+<meta name="description" content="Pièce Mbedüm Ndakaru : sérigraphie inspirée de Dakar, coton lourd, coupe unisexe.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
+<!-- barre d'annonce -->
 <div class="bar" data-bar>
-  <div class="bar__track">
-    <div class="bar__msg" data-bar-msg><span>profitez de réductions exceptionnelles</span><span aria-hidden="true">→</span></div>
-  </div>
-  <button class="bar__close" type="button" data-bar-close aria-label="fermer">✕</button>
+  <div class="bar__marquee"><span>Promo été : jusqu’à 2 000 FCFA d’économie</span><span>Livraison partout à Dakar · paiement à la livraison</span><span>Gaïndé — nouvelle collection disponible</span><span>Promo été : jusqu’à 2 000 FCFA d’économie</span><span>Livraison partout à Dakar · paiement à la livraison</span><span>Gaïndé — nouvelle collection disponible</span></div>
 </div>
 
-<header class="header header--solid" data-header>
+<!-- en-tête -->
+<header class="header">
   <nav class="header__nav">
-    <button class="burger" type="button" data-open="data-menu">menu</button>
-    <a href="boutique.html">boutique</a>
-    <a href="boutique.html?cat=gainde">gaïndé</a>
-    <a href="boutique.html?cat=tshirts">t-shirts</a>
-    <a href="boutique.html?cat=hoodies">hoodies</a>
-    <a href="marque.html">marque</a>
+    <button class="burger" type="button" data-open="data-menu" aria-label="Ouvrir le menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    <a href="boutique.html">Boutique</a>
+    <a href="boutique.html?cat=gainde">Gaïndé</a>
+    <a href="boutique.html?cat=tshirts">T-shirts</a>
+    <a href="boutique.html?cat=hoodies">Hoodies</a>
+    <a href="marque.html">La marque</a>
   </nav>
-  <a class="logo" href="index.html">mbedüm:ndakaru</a>
+  <a class="logo" href="index.html">Mbedüm Ndakaru</a>
   <div class="header__utils">
-    <a href="contact.html">contact</a>
-    <button type="button" data-open="data-search">recherche</button>
-    <button type="button" data-open="data-cart-drawer">panier <span class="count" data-cart-count></span></button>
+    <a href="contact.html">Contact</a>
+    <button type="button" data-open="data-search" aria-label="Rechercher"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    <button type="button" data-open="data-cart-drawer" aria-label="Ouvrir le panier"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="count" data-cart-count></span></button>
   </div>
 </header>
 
@@ -41,144 +40,188 @@
     <div class="pdp__gallery" data-pdp-gallery></div>
 
     <div class="pdp__panel">
-      <p class="pdp__crumb"><a href="boutique.html">boutique</a> / <a data-pdp-cat href="boutique.html">t-shirts</a></p>
-      <h1 class="pdp__title lower" data-pdp-title></h1>
+      <p class="pdp__crumb"><a href="boutique.html">Boutique</a> / <a data-pdp-cat href="boutique.html">T-shirts</a></p>
+      <h1 class="pdp__title" data-pdp-title></h1>
       <p class="pdp__price" data-pdp-price></p>
+      <p class="pdp__save" data-pdp-save></p>
       <p class="pdp__desc" data-pdp-desc></p>
 
       <div class="pdp__group">
-        <span class="pdp__label">couleur</span>
+        <span class="pdp__label">Couleur</span>
         <div class="opts" data-pdp-colors></div>
       </div>
 
       <div class="pdp__group">
-        <span class="pdp__label"><span>taille</span><span style="color:var(--sale)" data-size-error></span></span>
+        <span class="pdp__label"><span>Taille</span><span style="color:var(--sale)" data-size-error></span></span>
         <div class="opts" data-pdp-sizes></div>
       </div>
 
       <div class="pdp__actions">
-        <button class="btn btn--fill btn--wide" type="button" data-add>ajouter:panier</button>
-        <button class="btn btn--ink btn--wide" type="button" data-buy>acheter:maintenant</button>
+        <button class="btn btn--wide" type="button" data-add>Ajouter au panier</button>
+        <button class="btn btn--outline btn--wide" type="button" data-buy>Commander maintenant</button>
       </div>
 
       <div>
         <div class="acc">
-          <button class="acc__btn" type="button"><span>détails &amp; matière</span><span>+</span></button>
+          <button class="acc__btn" type="button"><span>Détails &amp; matière</span><span>+</span></button>
           <div class="acc__panel">
-            coton lourd peigné, coupe unisexe légèrement oversize. sérigraphie et broderie réalisées à Dakar.
-            lavage à 30°, à l'envers. repassage doux, jamais sur l'impression.
+            Coton lourd peigné, coupe unisexe légèrement oversize. Sérigraphie et broderie réalisées à Dakar.
+            Lavage à 30°, à l’envers. Repassage doux, jamais sur l’impression.
           </div>
         </div>
         <div class="acc">
-          <button class="acc__btn" type="button"><span>livraison</span><span>+</span></button>
+          <button class="acc__btn" type="button"><span>Livraison</span><span>+</span></button>
           <div class="acc__panel">
-            livraison à Dakar sous 24 à 48 h, régions sous 2 à 5 jours. paiement à la livraison possible.
-            frais confirmés par whatsapp au moment de la commande.
+            Livraison à Dakar et dans les régions. Paiement à la livraison possible.
+            Les délais et les frais sont confirmés par WhatsApp au moment de la commande.
           </div>
         </div>
         <div class="acc">
-          <button class="acc__btn" type="button"><span>échanges</span><span>+</span></button>
+          <button class="acc__btn" type="button"><span>Échanges</span><span>+</span></button>
           <div class="acc__panel">
-            échange de taille possible sous 7 jours, pièce non portée et non lavée, dans son emballage d'origine.
-            écrivez-nous au +221 78 927 15 31.
+            Échange de taille sous 7 jours, pièce non portée et non lavée, dans son emballage d’origine.
+            Écrivez-nous au +221 78 927 15 31.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <section class="section section--tight">
+  <section class="section section--accent">
     <div class="section__head">
-      <h2 class="section__title">vous:aimerez aussi</h2>
-      <a class="section__link" href="boutique.html">tout voir</a>
+      <h2 class="section__title">Vous aimerez aussi</h2>
+      <a class="link-more" href="boutique.html">Tout voir</a>
     </div>
     <div class="grid" data-grid="all" data-related data-limit="4"></div>
   </section>
 </main>
 
+<!-- réassurance -->
+<section class="assurance">
+  <div class="assurance__item">
+    <h3 class="assurance__title">Livraison à Dakar</h3>
+    <p class="assurance__text">Partout à Dakar et dans les régions.</p>
+  </div>
+  <div class="assurance__item">
+    <h3 class="assurance__title">Paiement à la livraison</h3>
+    <p class="assurance__text">Vous payez en recevant votre commande, en main propre.</p>
+  </div>
+  <div class="assurance__item">
+    <h3 class="assurance__title">Échange sous 7 jours</h3>
+    <p class="assurance__text">Taille qui ne va pas ? On l’échange, pièce non portée.</p>
+  </div>
+</section>
+
+<!-- newsletter -->
+<section class="member">
+  <div class="member__inner">
+    <div>
+      <h2 class="member__title">Newsletter</h2>
+      <p class="member__text">Les nouvelles pièces, les dates de drops et les ventes réservées aux abonnés.</p>
+      <ul class="member__list">
+        <li>Accès prioritaire aux nouveautés</li>
+        <li>Invitations aux événements à Dakar</li>
+        <li>Offres réservées aux abonnés</li>
+      </ul>
+    </div>
+    <form class="form" data-fake-form data-ok="Merci, votre inscription est enregistrée.">
+      <div class="form__row">
+        <input class="field" type="text" name="nom" placeholder="Nom" required>
+        <input class="field" type="tel" name="tel" placeholder="Téléphone">
+      </div>
+      <input class="field" type="email" name="email" placeholder="Email" required>
+      <button class="btn btn--wide" type="submit">S’inscrire</button>
+      <p class="form__note">En vous inscrivant, vous acceptez nos conditions et notre politique de confidentialité.</p>
+      <p class="form__ok" data-form-ok></p>
+    </form>
+  </div>
+</section>
+
+<!-- pied de page -->
 <footer class="footer">
   <div class="footer__cols">
     <div class="footer__brand">
-      <div class="footer__word">mbedüm:ndakaru</div>
-      <div class="footer__script">nous sommes là pour vous</div>
-      <p class="hero__meta" style="opacity:.6;color:var(--ink-60)">Dakar, Sénégal — depuis 1988</p>
+      <div class="footer__word">Mbedüm Ndakaru</div>
+      <p class="footer__tag">Vêtements inspirés de Dakar, depuis 1988.<br>Dakar, Sénégal.</p>
     </div>
     <div>
-      <h4>boutique</h4>
+      <h4>Boutique</h4>
       <ul>
-        <li><a href="boutique.html">tout</a></li>
-        <li><a href="boutique.html?cat=gainde">gaïndé</a></li>
-        <li><a href="boutique.html?cat=tshirts">t-shirts</a></li>
-        <li><a href="boutique.html?cat=hoodies">hoodies</a></li>
-        <li><a href="boutique.html?cat=promo">promo</a></li>
+        <li><a href="boutique.html">Toute la boutique</a></li>
+        <li><a href="boutique.html?cat=gainde">Gaïndé</a></li>
+        <li><a href="boutique.html?cat=tshirts">T-shirts</a></li>
+        <li><a href="boutique.html?cat=hoodies">Hoodies</a></li>
+        <li><a href="boutique.html?cat=promo">Promotions</a></li>
       </ul>
     </div>
     <div>
-      <h4>aide</h4>
+      <h4>Service client</h4>
       <ul>
-        <li><a href="contact.html">contact</a></li>
-        <li><a href="marque.html">la marque</a></li>
-        <li><a href="contact.html#livraison">livraison</a></li>
-        <li><a href="contact.html#retours">retours</a></li>
+        <li><a href="contact.html">Nous contacter</a></li>
+        <li><a href="contact.html#livraison">Livraison</a></li>
+        <li><a href="contact.html#retours">Échanges &amp; retours</a></li>
+        <li><a href="marque.html">La marque</a></li>
       </ul>
     </div>
     <div>
-      <h4>suivez-nous</h4>
+      <h4>Nous suivre</h4>
       <ul>
-        <li><a href="https://www.instagram.com/mbedum_ndakaru" target="_blank" rel="noopener">instagram</a></li>
-        <li><a href="https://www.tiktok.com/@mbedum_ndakaru" target="_blank" rel="noopener">tiktok</a></li>
+        <li><a href="https://www.instagram.com/mbedum_ndakaru" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@mbedum_ndakaru" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://wa.me/221789271531" target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="mailto:contact@mbedumndakaru.com">contact@mbedumndakaru.com</a></li>
-        <li><a href="tel:+221789271531">+221 78 927 15 31</a></li>
       </ul>
     </div>
   </div>
   <div class="footer__bottom">
-    <span>© <span data-year>2025</span> mbedüm ndakaru. tous droits réservés.</span>
-    <span>paiement à la livraison · Dakar &amp; régions</span>
+    <span>© <span data-year>2025</span> Mbedüm Ndakaru</span>
+    <span class="footer__pay"><span>Espèces</span><span>Wave</span><span>Orange Money</span><span>Free Money</span></span>
   </div>
 </footer>
 
+<!-- panneaux -->
 <div class="scrim" data-scrim></div>
 
-<aside class="drawer" data-cart-drawer aria-label="panier">
+<aside class="drawer" data-cart-drawer aria-label="Panier">
   <div class="drawer__head">
-    <span>panier <span class="count" data-cart-count></span></span>
-    <button type="button" data-close aria-label="fermer">✕</button>
+    <span>Panier <span class="count" data-cart-count></span></span>
+    <button type="button" data-close aria-label="Fermer">✕</button>
   </div>
   <div class="drawer__body" data-cart-body></div>
   <div class="drawer__foot">
-    <div class="drawer__total"><span>total</span><span data-cart-total>0 FCFA</span></div>
-    <button class="btn btn--fill btn--wide" type="button" data-checkout disabled>commander:whatsapp</button>
-    <p class="drawer__note">frais de livraison confirmés lors de la commande</p>
+    <div class="drawer__total"><span>Total</span><span data-cart-total>0 FCFA</span></div>
+    <button class="btn btn--wide" type="button" data-checkout disabled>Commander sur WhatsApp</button>
+    <p class="drawer__note">Frais de livraison confirmés lors de la commande.</p>
   </div>
 </aside>
 
-<nav class="menu" data-menu aria-label="menu">
+<nav class="menu" data-menu aria-label="Menu">
   <div class="drawer__head">
-    <span>menu</span>
-    <button type="button" data-close aria-label="fermer">✕</button>
+    <span>Menu</span>
+    <button type="button" data-close aria-label="Fermer">✕</button>
   </div>
   <div class="menu__body">
-    <a href="index.html">accueil</a>
-    <a href="boutique.html">boutique</a>
-    <a href="boutique.html?cat=gainde">gaïndé</a>
-    <a href="boutique.html?cat=tshirts">t-shirts</a>
-    <a href="boutique.html?cat=hoodies">hoodies</a>
-    <a href="boutique.html?cat=promo">promo</a>
-    <a href="marque.html">marque</a>
-    <a href="contact.html">contact</a>
+    <a href="index.html">Accueil</a>
+    <a href="boutique.html">Toute la boutique</a>
+    <a href="boutique.html?cat=gainde">Gaïndé</a>
+    <a href="boutique.html?cat=tshirts">T-shirts</a>
+    <a href="boutique.html?cat=hoodies">Hoodies</a>
+    <a href="boutique.html?cat=promo">Promotions</a>
+    <a href="marque.html">La marque</a>
+    <a href="contact.html">Contact</a>
   </div>
 </nav>
 
-<div class="search" data-search aria-label="recherche">
+<div class="search" data-search aria-label="Recherche">
   <div class="search__bar">
-    <input class="search__input" type="search" placeholder="rechercher une pièce" aria-label="rechercher">
-    <button type="button" data-close aria-label="fermer">✕</button>
+    <input class="search__input" type="search" placeholder="Rechercher une pièce" aria-label="Rechercher">
+    <button type="button" data-close aria-label="Fermer">✕</button>
   </div>
   <div class="search__results" data-search-results></div>
 </div>
 
 <script src="assets/js/config.js"></script>
+<script src="data/images.js"></script>
 <script src="data/products.js"></script>
 <script src="assets/js/app.js"></script>
 </body>

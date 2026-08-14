@@ -26,6 +26,28 @@
     return new URLSearchParams(location.search).get(name);
   }
 
+  /* Images responsives : window.IMG (data/images.js) donne la largeur d'origine
+     et les variantes générées, pour ne pas télécharger 720 px sur un écran de 180. */
+  var IMG = window.IMG || {};
+
+  function srcset(src) {
+    var info = IMG[src];
+    if (!info || !info.v || !info.v.length) return '';
+    var base = src.replace(/\.jpg$/i, '');
+    var parts = info.v.map(function (w) { return base + '-' + w + 'w.jpg ' + w + 'w'; });
+    parts.push(src + ' ' + info.w + 'w');
+    return ' srcset="' + parts.join(', ') + '"';
+  }
+
+  function imgAttrs(src, sizes) {
+    var info = IMG[src];
+    var dim = info ? ' width="' + info.w + '"' : '';
+    return srcset(src) + (sizes ? ' sizes="' + sizes + '"' : '') + dim;
+  }
+
+  /* une carte occupe la moitié de l'écran au téléphone, un tiers puis un quart ensuite */
+  var CARD_SIZES = '(min-width: 1000px) 25vw, (min-width: 720px) 33vw, 50vw';
+
   function bySlug(slug) {
     for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].slug === slug) return PRODUCTS[i];
     return null;
@@ -100,15 +122,15 @@
     if (!body) return;
 
     if (!cart.length) {
-      body.innerHTML = '<p class="drawer__empty">votre panier est vide</p>';
+      body.innerHTML = '<p class="drawer__empty">Votre panier est vide</p>';
     } else {
       body.innerHTML = cart.map(function (l) {
         return '' +
           '<div class="line-item">' +
-            '<a href="produit.html?p=' + encodeURIComponent(l.slug) + '"><img src="' + esc(l.image) + '" alt="' + esc(l.title) + '" loading="lazy"></a>' +
+            '<a href="produit.html?p=' + encodeURIComponent(l.slug) + '"><img src="' + esc(l.image) + '"' + imgAttrs(l.image, '72px') + ' alt="' + esc(l.title) + '" loading="lazy" decoding="async"></a>' +
             '<div class="line-item__body">' +
-              '<a class="line-item__name lower" href="produit.html?p=' + encodeURIComponent(l.slug) + '">' + esc(l.title) + '</a>' +
-              '<div class="line-item__meta">' + esc(l.color.toLowerCase()) + ' · taille ' + esc(l.size.toLowerCase()) + '</div>' +
+              '<a class="line-item__name" href="produit.html?p=' + encodeURIComponent(l.slug) + '">' + esc(l.title) + '</a>' +
+              '<div class="line-item__meta">' + esc(l.color) + ' · Taille ' + esc(l.size) + '</div>' +
               '<div class="line-item__meta">' + money(l.price) + '</div>' +
               '<div class="line-item__row">' +
                 '<span class="qty">' +
@@ -116,7 +138,7 @@
                   '<span>' + l.qty + '</span>' +
                   '<button type="button" data-qty="1" data-key="' + esc(l.key) + '" aria-label="ajouter un article">+</button>' +
                 '</span>' +
-                '<button type="button" class="line-item__remove" data-remove="' + esc(l.key) + '">retirer</button>' +
+                '<button type="button" class="line-item__remove" data-remove="' + esc(l.key) + '">Retirer</button>' +
               '</div>' +
             '</div>' +
           '</div>';
@@ -197,24 +219,25 @@
     var price = onSale
       ? '<s>' + money(p.compareAt) + '</s><span class="now">' + money(p.price) + '</span>'
       : '<span>' + money(p.price) + '</span>';
-    var tag = p.collection === 'gainde'
-      ? '<span class="card__tag card__tag--new">gaïndé</span>'
-      : onSale
-        ? '<span class="card__tag card__tag--sale">promo</span>'
-        : '<span class="card__tag">nouveau:in</span>';
+    // le badge annonce l'économie réalisée plutôt qu'un simple « promo »
+    var badge = onSale
+      ? '<span class="card__badge">Économisez ' + money(p.compareAt - p.price) + '</span>'
+      : p.collection === 'gainde'
+        ? '<span class="card__badge card__badge--new">Nouveauté</span>'
+        : '';
 
     return '' +
       '<article class="card">' +
         '<div class="card__frame">' +
           '<a class="card__media" href="' + url + '" aria-label="' + esc(p.title) + '">' +
-            tag +
-            '<img class="card__main" src="' + esc(p.images[0]) + '" alt="' + esc(p.title) + '" loading="lazy">' +
-            '<img class="card__alt" src="' + esc(alt) + '" alt="" aria-hidden="true" loading="lazy">' +
+            badge +
+            '<img class="card__main" src="' + esc(p.images[0]) + '"' + imgAttrs(p.images[0], CARD_SIZES) + ' alt="' + esc(p.title) + '" loading="lazy" decoding="async">' +
+            '<img class="card__alt" src="' + esc(alt) + '"' + imgAttrs(alt, CARD_SIZES) + ' alt="" aria-hidden="true" loading="lazy" decoding="async">' +
           '</a>' +
-          '<div class="card__quick"><a class="btn" href="' + url + '">voir:produit</a></div>' +
+          '<div class="card__quick"><a class="btn" href="' + url + '">Ajout rapide</a></div>' +
         '</div>' +
         '<a class="card__info" href="' + url + '">' +
-          '<span class="card__name lower">' + esc(p.title) + '</span>' +
+          '<span class="card__name">' + esc(p.title) + '</span>' +
           '<span class="card__price">' + price + '</span>' +
         '</a>' +
       '</article>';
@@ -234,7 +257,41 @@
       if (exclude) list = list.filter(function (p) { return p.slug !== exclude; });
 
       if (limit) list = list.slice(0, limit);
-      el.innerHTML = list.map(cardHTML).join('');
+      var html = list.map(cardHTML).join('');
+
+      // « data-collection-tile="url|libellé" » ajoute une tuile d'appel en fin de rangée
+      var tile = el.getAttribute('data-collection-tile');
+      if (tile) {
+        var bits = tile.split('|');
+        html += '<a class="card--collection" href="' + esc(bits[0]) + '">' + esc(bits[1] || 'Voir la collection') + ' ›</a>';
+      }
+      el.innerHTML = html;
+    });
+  }
+
+  /* ------------------------------------------------------------- carrousel */
+
+  function initCarousels() {
+    $$('[data-carousel]').forEach(function (root) {
+      var track = $('[data-carousel-track]', root);
+      if (!track) return;
+
+      var mode = root.getAttribute('data-carousel');
+      var list = PRODUCTS.slice();
+      if (mode === 'gainde') list = list.filter(function (p) { return p.collection === 'gainde'; });
+      else if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
+      if (!track.children.length) track.innerHTML = list.map(cardHTML).join('');
+
+      function step() {
+        var first = track.firstElementChild;
+        return first ? first.getBoundingClientRect().width + 10 : track.clientWidth * .8;
+      }
+      $$('[data-carousel-prev]', root).forEach(function (b) {
+        b.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      });
+      $$('[data-carousel-next]', root).forEach(function (b) {
+        b.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      });
     });
   }
 
@@ -263,10 +320,10 @@
       var c = $('[data-shop-count]');
       if (c) c.textContent = list.length + (list.length > 1 ? ' pièces' : ' pièce');
 
-      var label = { tout: 'tout', tshirts: 't-shirts', hoodies: 'hoodies', promo: 'promo', gainde: 'gaïndé' }[state.cat] || state.cat;
+      var label = { tout: 'Toute la boutique', tshirts: 'T-shirts', hoodies: 'Hoodies', promo: 'Promotions', gainde: 'Gaïndé' }[state.cat] || state.cat;
       var t = $('[data-shop-title]');
-      if (t) t.textContent = 'boutique:' + label;
-      document.title = 'boutique' + (state.cat === 'tout' ? '' : ' ' + label) + ' — mbedüm:ndakaru';
+      if (t) t.textContent = label;
+      document.title = label + ' — Mbedüm Ndakaru';
 
       $$('[data-cat]').forEach(function (b) {
         b.classList.toggle('is-on', b.getAttribute('data-cat') === state.cat);
@@ -296,7 +353,7 @@
     var p = bySlug(param('p') || '') || PRODUCTS[0];
     if (!p) return;
 
-    document.title = p.title + ' — mbedüm:ndakaru';
+    document.title = p.title + ' — Mbedüm Ndakaru';
 
     var sel = { size: null, color: p.colors[0] };
 
@@ -310,8 +367,11 @@
         imgs.splice(imgs.indexOf(lead), 1);
         imgs.unshift(lead);
       }
+      var gSizes = '(min-width: 1000px) 55vw, (min-width: 720px) 50vw, 100vw';
       gallery.innerHTML = imgs.map(function (src, i) {
-        return '<img src="' + esc(src) + '" alt="' + esc(p.title) + ' — vue ' + (i + 1) + '"' + (i ? ' loading="lazy"' : '') + '>';
+        return '<img src="' + esc(src) + '"' + imgAttrs(src, gSizes) +
+          ' alt="' + esc(p.title) + ' — vue ' + (i + 1) + '"' +
+          (i ? ' loading="lazy" decoding="async"' : ' fetchpriority="high"') + '>';
       }).join('');
     }
     drawGallery(sel.color);
@@ -322,18 +382,20 @@
     $('[data-pdp-price]').innerHTML = onSale
       ? '<s>' + money(p.compareAt) + '</s><span class="now">' + money(p.price) + '</span>'
       : '<span>' + money(p.price) + '</span>';
+    var saveEl = $('[data-pdp-save]');
+    if (saveEl) saveEl.textContent = onSale ? 'Économisez ' + money(p.compareAt - p.price) : '';
 
     var descEl = $('[data-pdp-desc]');
-    descEl.textContent = p.description || 'pièce en coton, sérigraphie signée mbedüm ndakaru. coupe unisexe, inspirée des rues de Dakar.';
+    descEl.textContent = p.description || 'Pièce en coton, sérigraphie signée Mbedüm Ndakaru. Coupe unisexe, inspirée des rues de Dakar.';
     
 
-    $('[data-pdp-cat]').textContent = p.category === 'hoodies' ? 'hoodies' : 't-shirts';
+    $('[data-pdp-cat]').textContent = p.category === 'hoodies' ? 'Hoodies' : 'T-shirts';
     $('[data-pdp-cat]').href = 'boutique.html?cat=' + p.category;
 
     function optsHTML(values, group) {
       return values.map(function (v) {
         var on = group === 'color' && v === sel.color;
-        return '<button type="button" class="opt' + (on ? ' is-on' : '') + '" data-opt="' + group + '" data-val="' + esc(v) + '">' + esc(v.toLowerCase()) + '</button>';
+        return '<button type="button" class="opt' + (on ? ' is-on' : '') + '" data-opt="' + group + '" data-val="' + esc(v) + '">' + esc(v) + '</button>';
       }).join('');
     }
 
@@ -353,7 +415,9 @@
 
     function requireSize() {
       if (!sel.size) {
-        $('[data-size-error]').textContent = 'choisissez une taille';
+        $('[data-size-error]').textContent = 'Choisissez une taille';
+        // au téléphone les tailles sont souvent masquées par la barre d'achat
+        $('[data-pdp-sizes]').scrollIntoView({ block: 'center', behavior: 'smooth' });
         return false;
       }
       return true;
@@ -402,7 +466,7 @@
       });
       results.innerHTML = list.length
         ? '<div class="grid">' + list.map(cardHTML).join('') + '</div>'
-        : '<p class="search__empty">aucun résultat pour « ' + esc(q) +' »</p>';
+        : '<p class="search__empty">Aucun résultat pour « ' + esc(q) + ' »</p>';
     }
 
     input.addEventListener('input', run);
@@ -523,6 +587,7 @@
     initBar();
     initHeader();
     renderGrids();
+    initCarousels();
     initShop();
     initPDP();
     renderGrids(); // relance pour les grilles "produits liés" du PDP

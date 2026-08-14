@@ -547,5 +547,66 @@
     "w": 400
    }
   ]
+ },
+ "assets/img/products/dakar-heritage-01.jpg": {
+  "w": 1200,
+  "variants": [
+   {
+    "file": "assets/img/products/dakar-heritage-01-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/products/dakar-heritage-01-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/products/renaissance-teranga-01.jpg": {
+  "w": 1200,
+  "variants": [
+   {
+    "file": "assets/img/products/renaissance-teranga-01-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/products/renaissance-teranga-01-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/products/mariam-dicoh-01.jpg": {
+  "w": 1200,
+  "variants": [
+   {
+    "file": "assets/img/products/mariam-dicoh-01-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/products/mariam-dicoh-01-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/site/hero-promo.jpg": {
+  "w": 1400,
+  "variants": [
+   {
+    "file": "assets/img/site/hero-promo-400w.jpg",
+    "w": 400
+   },
+   {
+    "file": "assets/img/site/hero-promo-800w.jpg",
+    "w": 800
+   }
+  ]
+ },
+ "assets/img/products/gainde-creme-04.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/gainde-creme-04-400w.jpg",
+    "w": 400
+   }
+  ]
  }
 }

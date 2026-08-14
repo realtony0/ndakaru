@@ -7,11 +7,14 @@ window.PRODUCTS = [
     "price": 10000,
     "compareAt": null,
     "currency": "FCFA",
-    "description": "Le maillot Gaïndé — le Lion.\n\nÉcusson Sunugaal FSF, monogramme Maison Ndakaru sur le cœur, lettrage ton sur ton. Coupe maillot, coton lourd, épaules tombantes.\n\nTrois coloris : noir, crème et blanc.",
+    "description": "Le maillot Gaïndé — le Lion.\n\nÉcusson Sunugaal FSF, monogramme Maison Ndakaru sur le cœur, lettrage ton sur ton. Coupe maillot, coton lourd, épaules tombantes.\n\nAu dos, la sérigraphie Sunugaal : le stade, les drapeaux, la foule.\n\nTrois coloris : noir, crème et blanc.",
     "images": [
       "assets/img/products/gainde-noir-01.jpg",
+      "assets/img/products/gainde-creme-04.jpg",
       "assets/img/products/gainde-creme-01.jpg",
       "assets/img/products/gainde-duo-01.jpg",
+      "assets/img/products/sunugaal-dos-02.jpg",
+      "assets/img/products/sunugaal-dos-01.jpg",
       "assets/img/products/gainde-blanc-01.jpg",
       "assets/img/products/gainde-noir-02.jpg",
       "assets/img/products/gainde-creme-02.jpg",
@@ -38,35 +41,6 @@ window.PRODUCTS = [
       "Noir": "assets/img/products/gainde-noir-01.jpg",
       "Crème": "assets/img/products/gainde-creme-01.jpg",
       "Blanc": "assets/img/products/gainde-blanc-01.jpg"
-    }
-  },
-  {
-    "slug": "sunugaal-t-shirt",
-    "title": "Sunugaal (T-shirt)",
-    "category": "tshirts",
-    "collection": "gainde",
-    "price": 10000,
-    "compareAt": null,
-    "currency": "FCFA",
-    "description": "Dos imprimé : le stade, les drapeaux, la foule.\n\n« Là où les Lions passent, l'histoire s'écrit. »\n\nSérigraphie grand format sur coton crème.",
-    "images": [
-      "assets/img/products/sunugaal-dos-02.jpg",
-      "assets/img/products/sunugaal-dos-01.jpg"
-    ],
-    "sizes": [
-      "M",
-      "L",
-      "XL",
-      "2XL",
-      "3XL",
-      "4XL"
-    ],
-    "colors": [
-      "Crème"
-    ],
-    "sourceSlug": null,
-    "colorImages": {
-      "Crème": "assets/img/products/sunugaal-dos-02.jpg"
     }
   },
   {
@@ -341,6 +315,7 @@ window.PRODUCTS = [
     "currency": "FCFA",
     "description": "Inspiré de la première femme chimiste de Côte d’Ivoire, représentée sur la pièce de 25 francs CFA.\n\nUne création vintage qui rend hommage à la science, à la culture et à l’élégance africaine.\n\nFierté. Héritage. Savoir.",
     "images": [
+      "assets/img/products/mariam-dicoh-01.jpg",
       "assets/img/products/27706770-bf85-4e7b-8218-33d5d9b53592.jpg"
     ],
     "sizes": [
@@ -352,12 +327,15 @@ window.PRODUCTS = [
       "4XL"
     ],
     "colors": [
+      "Beige",
       "Blanc",
-      "Noir",
-      "Beige"
+      "Noir"
     ],
     "sourceSlug": "t-shirt-mariam-dicoh-",
-    "collection": "heritage"
+    "collection": "heritage",
+    "colorImages": {
+      "Beige": "assets/img/products/mariam-dicoh-01.jpg"
+    }
   },
   {
     "slug": "t-shirt-renaissance-x-teranga",
@@ -368,6 +346,7 @@ window.PRODUCTS = [
     "currency": "FCFA",
     "description": "Avec ses teintes douces et son graphisme végétal, ce modèle rend hommage à la Renaissance africaine et à l’âme de la Teranga.\n\nDakar, ville d’histoire et d’élégance, y est représentée comme une terre d’équilibre entre mémoire et fierté.\n\nIci naît l’élégance inspirée par l’Afrique.",
     "images": [
+      "assets/img/products/renaissance-teranga-01.jpg",
       "assets/img/products/15a2c1e7-57b8-47d0-bcbe-aa47862f5a08.jpg"
     ],
     "sizes": [
@@ -395,6 +374,7 @@ window.PRODUCTS = [
     "currency": "FCFA",
     "description": "Ce modèle unit deux symboles puissants de Dakar : la Mosquée de la Divinité et la Gare de Dakar.\n\nUn mariage d’architecture, de foi et d’élégance.\n\nUn hommage à la grandeur et à la beauté de la capitale.",
     "images": [
+      "assets/img/products/dakar-heritage-01.jpg",
       "assets/img/products/f05fee1c-0ffb-4efb-8f8a-4f69d961bf9f.jpg"
     ],
     "sizes": [

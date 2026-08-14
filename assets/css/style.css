@@ -225,7 +225,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- grille produits ---------- */
 
-.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px var(--gap); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px var(--gap); }
 
 .card { position: relative; display: block; text-align: center; }
 .card__frame { position: relative; overflow: hidden; background: var(--bg-accent); }
@@ -242,12 +242,15 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: absolute;
   top: 8px; right: 8px;
   z-index: 2;
+  max-width: calc(100% - 16px);
   background: #fff;
   color: var(--text-light);
   padding: 5px 9px;
   font-size: 10px;
   letter-spacing: .06em;
   text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 .card__badge--new { background: var(--primary); color: #fff; }
@@ -639,7 +642,7 @@ textarea.field { min-height: 140px; padding: 14px; resize: vertical; }
   .section__head { margin-bottom: 50px; }
   .section--flush { padding-left: 0; padding-right: 0; }
 
-  .grid { grid-template-columns: repeat(3, 1fr); gap: 34px var(--gap); }
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px var(--gap); }
 
   .carousel__track > * { flex: 0 0 30%; }
   .carousel__nav {
@@ -698,7 +701,7 @@ textarea.field { min-height: 140px; padding: 14px; resize: vertical; }
    ========================================================================== */
 
 @media (min-width: 1000px) {
-  .grid { grid-template-columns: repeat(4, 1fr); }
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .carousel__track > * { flex: 0 0 23.5%; }
   .footer__cols { grid-template-columns: 1.3fr repeat(3, 1fr); gap: clamp(24px, 4vw, 60px); }
   .pdp { grid-template-columns: 1.2fr 1fr; }

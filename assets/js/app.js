@@ -249,7 +249,12 @@
       var limit = parseInt(el.getAttribute('data-limit'), 10) || 0;
       var list = PRODUCTS.slice();
 
-      if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
+      // « data-slugs="a,b,c" » impose une sélection et son ordre
+      var picked = el.getAttribute('data-slugs');
+      if (picked) {
+        list = picked.split(',').map(function (s) { return bySlug(s.trim()); }).filter(Boolean);
+      }
+      else if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
       else if (mode === 'gainde') list = list.filter(function (p) { return p.collection === 'gainde'; });
       else if (mode === 'hoodies' || mode === 'tshirts') list = list.filter(function (p) { return p.category === mode; });
 

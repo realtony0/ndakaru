@@ -1,5 +1,134 @@
 window.PRODUCTS = [
   {
+    "slug": "dakar-with-pride",
+    "title": "Dakar With Pride",
+    "category": "tshirts",
+    "collection": "nouveau",
+    "price": 12000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Une pièce inspirée par les rues, les couleurs, l’architecture et l’énergie de Ndakaru. Un design qui mélange héritage culturel et esthétique streetwear vintage.",
+    "images": [
+      "assets/img/products/dakar-pride-02.jpg",
+      "assets/img/products/dakar-pride-01.jpg",
+      "assets/img/products/dakar-pride-03.jpg",
+      "assets/img/products/dakar-pride-04.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Noir",
+      "Blanc"
+    ],
+    "colorImages": {
+      "Noir": "assets/img/products/dakar-pride-02.jpg",
+      "Blanc": "assets/img/products/dakar-pride-01.jpg"
+    },
+    "sourceSlug": null
+  },
+  {
+    "slug": "ndakaru-dice",
+    "title": "Ndakaru Dice",
+    "category": "tshirts",
+    "collection": "nouveau",
+    "price": 10000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Un design inspiré des dés, entre hasard, chance et culture streetwear dakaroise. Le Ndakaru Dice mêle esthétique vintage et identité sénégalaise pour un look unique.",
+    "images": [
+      "assets/img/products/ndakaru-dice-01.jpg",
+      "assets/img/products/ndakaru-dice-02.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Noir"
+    ],
+    "colorImages": {
+      "Noir": "assets/img/products/ndakaru-dice-01.jpg"
+    },
+    "sourceSlug": null
+  },
+  {
+    "slug": "ndate-yalla-mbodj-legacy",
+    "title": "Ndaté Yalla Mbodj — Legacy",
+    "category": "tshirts",
+    "collection": "nouveau",
+    "price": 12000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Un hommage au Waalo Waalo et à l’héritage de Ndaté Yalla Mbodj, symbole de force, de fierté et de résistance.\n\nUne pièce vintage pensée pour faire vivre notre histoire à travers le streetwear.",
+    "images": [
+      "assets/img/products/ndate-yalla-01.jpg",
+      "assets/img/products/ndate-yalla-02.jpg",
+      "assets/img/products/ndate-yalla-03.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Noir",
+      "Vert",
+      "Blanc"
+    ],
+    "colorImages": {
+      "Blanc": "assets/img/products/ndate-yalla-01.jpg"
+    },
+    "sourceSlug": null
+  },
+  {
+    "slug": "fuki-pench-ak-niar",
+    "title": "Fuki Pench ak Niar",
+    "category": "tshirts",
+    "collection": "nouveau",
+    "price": 10000,
+    "compareAt": null,
+    "currency": "FCFA",
+    "description": "Inspiré des 12 pënc traditionnels lébous, Fuki Pench ak Niar rend hommage aux racines profondes de Dakar et à ceux qui ont façonné son identité.\n\nUne pièce entre héritage, mémoire et streetwear, où les codes de l’ancienne Dakar rencontrent l’esthétique contemporaine de Mbedüm Ndakaru.\n\n12 foyers. Une histoire. Une identité. Dakar.",
+    "images": [
+      "assets/img/products/fuki-pench-02.jpg",
+      "assets/img/products/fuki-pench-01.jpg",
+      "assets/img/products/fuki-pench-03.jpg",
+      "assets/img/products/fuki-pench-04.jpg"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "colors": [
+      "Noir",
+      "Vert",
+      "Marron"
+    ],
+    "colorImages": {
+      "Noir": "assets/img/products/fuki-pench-02.jpg",
+      "Vert": "assets/img/products/fuki-pench-02.jpg",
+      "Marron": "assets/img/products/fuki-pench-02.jpg"
+    },
+    "sourceSlug": null
+  },
+  {
     "slug": "gainde-t-shirt",
     "title": "Gaïndé (T-shirt)",
     "category": "tshirts",

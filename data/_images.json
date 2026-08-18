@@ -466,7 +466,7 @@
   ]
  },
  "assets/img/site/look-gainde-contreplongee.jpg": {
-  "w": 1124,
+  "w": 1100,
   "variants": [
    {
     "file": "assets/img/site/look-gainde-contreplongee-400w.jpg",
@@ -549,7 +549,7 @@
   ]
  },
  "assets/img/products/dakar-heritage-01.jpg": {
-  "w": 1200,
+  "w": 1100,
   "variants": [
    {
     "file": "assets/img/products/dakar-heritage-01-400w.jpg",
@@ -562,7 +562,7 @@
   ]
  },
  "assets/img/products/renaissance-teranga-01.jpg": {
-  "w": 1200,
+  "w": 1100,
   "variants": [
    {
     "file": "assets/img/products/renaissance-teranga-01-400w.jpg",
@@ -575,7 +575,7 @@
   ]
  },
  "assets/img/products/mariam-dicoh-01.jpg": {
-  "w": 1200,
+  "w": 1100,
   "variants": [
    {
     "file": "assets/img/products/mariam-dicoh-01-400w.jpg",
@@ -588,7 +588,7 @@
   ]
  },
  "assets/img/site/hero-promo.jpg": {
-  "w": 1400,
+  "w": 1100,
   "variants": [
    {
     "file": "assets/img/site/hero-promo-400w.jpg",
@@ -605,6 +605,123 @@
   "variants": [
    {
     "file": "assets/img/products/gainde-creme-04-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/dakar-pride-01.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/dakar-pride-01-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/dakar-pride-02.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/dakar-pride-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/dakar-pride-03.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/dakar-pride-03-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/dakar-pride-04.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/dakar-pride-04-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/fuki-pench-01.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/fuki-pench-01-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/fuki-pench-02.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/fuki-pench-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/fuki-pench-03.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/fuki-pench-03-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/fuki-pench-04.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/fuki-pench-04-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ndakaru-dice-01.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ndakaru-dice-01-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ndakaru-dice-02.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ndakaru-dice-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ndate-yalla-01.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ndate-yalla-01-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ndate-yalla-02.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ndate-yalla-02-400w.jpg",
+    "w": 400
+   }
+  ]
+ },
+ "assets/img/products/ndate-yalla-03.jpg": {
+  "w": 720,
+  "variants": [
+   {
+    "file": "assets/img/products/ndate-yalla-03-400w.jpg",
     "w": 400
    }
   ]

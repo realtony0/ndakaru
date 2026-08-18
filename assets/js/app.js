@@ -48,6 +48,9 @@
   /* une carte occupe la moitié de l'écran au téléphone, un tiers puis un quart ensuite */
   var CARD_SIZES = '(min-width: 1000px) 25vw, (min-width: 720px) 33vw, 50vw';
 
+  /* l'image de survol double le poids des grilles ; au tactile elle ne sert à rien */
+  var HAS_HOVER = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
   function bySlug(slug) {
     for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].slug === slug) return PRODUCTS[i];
     return null;
@@ -222,7 +225,7 @@
     // le badge annonce l'économie réalisée plutôt qu'un simple « promo »
     var badge = onSale
       ? '<span class="card__badge">Économisez ' + money(p.compareAt - p.price) + '</span>'
-      : p.collection === 'gainde'
+      : (p.collection === 'gainde' || p.collection === 'nouveau')
         ? '<span class="card__badge card__badge--new">Nouveauté</span>'
         : '';
 
@@ -232,7 +235,9 @@
           '<a class="card__media" href="' + url + '" aria-label="' + esc(p.title) + '">' +
             badge +
             '<img class="card__main" src="' + esc(p.images[0]) + '"' + imgAttrs(p.images[0], CARD_SIZES) + ' alt="' + esc(p.title) + '" loading="lazy" decoding="async">' +
-            '<img class="card__alt" src="' + esc(alt) + '"' + imgAttrs(alt, CARD_SIZES) + ' alt="" aria-hidden="true" loading="lazy" decoding="async">' +
+            (HAS_HOVER && alt !== p.images[0]
+              ? '<img class="card__alt" src="' + esc(alt) + '"' + imgAttrs(alt, CARD_SIZES) + ' alt="" aria-hidden="true" loading="lazy" decoding="async">'
+              : '') +
           '</a>' +
           '<div class="card__quick"><a class="btn" href="' + url + '">Ajout rapide</a></div>' +
         '</div>' +
@@ -256,6 +261,7 @@
       }
       else if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
       else if (mode === 'gainde') list = list.filter(function (p) { return p.collection === 'gainde'; });
+      else if (mode === 'nouveau') list = list.filter(function (p) { return p.collection === 'nouveau'; });
       else if (mode === 'hoodies' || mode === 'tshirts') list = list.filter(function (p) { return p.category === mode; });
 
       var exclude = el.getAttribute('data-exclude');
@@ -285,7 +291,8 @@
       var list = PRODUCTS.slice();
       if (mode === 'gainde') list = list.filter(function (p) { return p.collection === 'gainde'; });
       else if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
-      if (!track.children.length) track.innerHTML = list.map(cardHTML).join('');
+      var max = parseInt(root.getAttribute('data-limit'), 10) || 8;
+      if (!track.children.length) track.innerHTML = list.slice(0, max).map(cardHTML).join('');
 
       function step() {
         var first = track.firstElementChild;
@@ -316,6 +323,8 @@
         list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
       } else if (state.cat === 'gainde') {
         list = list.filter(function (p) { return p.collection === 'gainde'; });
+      } else if (state.cat === 'nouveau') {
+        list = list.filter(function (p) { return p.collection === 'nouveau'; });
       }
       if (state.sort === 'prix-asc') list.sort(function (a, b) { return a.price - b.price; });
       if (state.sort === 'prix-desc') list.sort(function (a, b) { return b.price - a.price; });
@@ -325,7 +334,7 @@
       var c = $('[data-shop-count]');
       if (c) c.textContent = list.length + (list.length > 1 ? ' pièces' : ' pièce');
 
-      var label = { tout: 'Toute la boutique', tshirts: 'T-shirts', hoodies: 'Hoodies', promo: 'Promotions', gainde: 'Gaïndé' }[state.cat] || state.cat;
+      var label = { tout: 'Toute la boutique', tshirts: 'T-shirts', hoodies: 'Hoodies', promo: 'Promotions', gainde: 'Gaïndé', nouveau: 'Nouveautés' }[state.cat] || state.cat;
       var t = $('[data-shop-title]');
       if (t) t.textContent = label;
       document.title = label + ' — Mbedüm Ndakaru';

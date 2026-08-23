@@ -3,258 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mbedüm Ndakaru — vêtements inspirés de Dakar</title>
-<meta name="description" content="Mbedüm Ndakaru : t-shirts et hoodies sérigraphiés inspirés de Dakar depuis 1988. Collection Gaïndé, livraison à Dakar, paiement à la livraison.">
-<meta property="og:title" content="Mbedüm Ndakaru — vêtements inspirés de Dakar">
-<meta property="og:description" content="T-shirts et hoodies sérigraphiés, inspirés des rues de Dakar.">
-<meta property="og:image" content="assets/img/site/look-hero.jpg">
-<meta property="og:type" content="website">
+<title>Mbedüm Ndakaru</title>
+<meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 32px 22px;
+    background: #14181a;
+    color: #fff;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bloc { display: grid; gap: 20px; justify-items: center; max-width: 460px; }
+  .logo {
+    font-family: "Cabin", "Poppins", Arial, sans-serif;
+    font-size: clamp(19px, 5.6vw, 25px);
+    font-weight: 700;
+    letter-spacing: .02em;
+  }
+  .rule { width: 42px; height: 2px; background: #fff; opacity: .8; }
+  p {
+    margin: 0;
+    font-size: clamp(14.5px, 4vw, 16px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, .8);
+  }
+</style>
 </head>
 <body>
-
-<!-- barre d'annonce -->
-<div class="bar" data-bar>
-  <div class="bar__marquee"><span>Promo été : jusqu’à 2 000 FCFA d’économie</span><span>Livraison partout à Dakar · paiement à la livraison</span><span>Gaïndé — nouvelle collection disponible</span><span>Promo été : jusqu’à 2 000 FCFA d’économie</span><span>Livraison partout à Dakar · paiement à la livraison</span><span>Gaïndé — nouvelle collection disponible</span></div>
-</div>
-
-<!-- en-tête -->
-<header class="header">
-  <nav class="header__nav">
-    <button class="burger" type="button" data-open="data-menu" aria-label="Ouvrir le menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
-    <a href="boutique.html">Boutique</a>
-    <a href="boutique.html?cat=nouveau">Nouveautés</a>
-    <a href="boutique.html?cat=gainde">Gaïndé</a>
-    <a href="boutique.html?cat=tshirts">T-shirts</a>
-    <a href="boutique.html?cat=hoodies">Hoodies</a>
-    <a href="marque.html">La marque</a>
-  </nav>
-  <a class="logo" href="index.html">Mbedüm Ndakaru</a>
-  <div class="header__utils">
-    <a href="contact.html">Contact</a>
-    <button type="button" data-open="data-search" aria-label="Rechercher"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
-    <button type="button" data-open="data-cart-drawer" aria-label="Ouvrir le panier"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="count" data-cart-count></span></button>
-  </div>
-</header>
-
-<main>
-
-  <!-- hero -->
-  <section class="hero">
-    <div class="hero__media">
-      <img src="assets/img/site/hero-promo.jpg" alt="Trois jeunes entourés de t-shirts Mbedüm Ndakaru suspendus sur des portants, à Dakar" srcset="assets/img/site/hero-promo-400w.jpg 400w, assets/img/site/hero-promo-800w.jpg 800w, assets/img/site/hero-promo.jpg 1400w" sizes="100vw" width="1400" fetchpriority="high">
-    </div>
-    <div class="hero__inner">
-      <h1 class="hero__title">Promo été sur la sélection</h1>
-      <span class="hero__rule"></span>
-      <p class="hero__sub">Jusqu’à 2 000 FCFA d’économie sur les pièces signalées.</p>
-      <a class="btn btn--light" href="boutique.html?cat=promo">Voir les promotions</a>
-    </div>
-  </section>
-
-  <!-- les plus populaires -->
-  <section class="section">
-    <div class="section__head">
-      <h2 class="section__title">Les plus populaires</h2>
-      <a class="link-more" href="boutique.html">Tout voir</a>
-    </div>
-    <div class="grid" data-grid="all" data-slugs="t-shirt-mariam-dicoh,t-shirt-dakar-heritage-mosquee-gare,t-shirt-renaissance-x-teranga" data-collection-tile="boutique.html|Toute la boutique"></div>
-  </section>
-
-  <!-- collection gaïndé -->
-  <section class="banner" id="gainde">
-    <img src="assets/img/site/look-gainde-contreplongee.jpg" alt="Trois modèles portant les maillots Gaïndé crème, noir et blanc dans un quartier de Dakar" srcset="assets/img/site/look-gainde-contreplongee-400w.jpg 400w, assets/img/site/look-gainde-contreplongee-800w.jpg 800w, assets/img/site/look-gainde-contreplongee.jpg 1124w" sizes="100vw" width="1124" loading="lazy" decoding="async">
-    <div class="banner__body">
-      <span class="banner__kicker">Nouvelle collection</span>
-      <h2 class="banner__title">Gaïndé</h2>
-      <p class="banner__text">Le maillot du Lion. Écusson Sunugaal FSF, monogramme Maison Ndakaru, lettrage ton sur ton.</p>
-      <a class="btn btn--light" href="boutique.html?cat=gainde">Découvrir la collection</a>
-    </div>
-  </section>
-
-  <!-- carrousel -->
-  <section class="section section--flush">
-    <div class="section__head">
-      <h2 class="section__title">L’incontournable</h2>
-      <a class="link-more" href="boutique.html">Tout voir</a>
-    </div>
-    <div class="carousel" data-carousel="all">
-      <div class="carousel__nav">
-        <button type="button" data-carousel-prev aria-label="Précédent">‹</button>
-        <button type="button" data-carousel-next aria-label="Suivant">›</button>
-      </div>
-      <div class="carousel__track" data-carousel-track></div>
-    </div>
-  </section>
-
-  <!-- nos collections -->
-  <section class="section section--flush">
-    <div class="section__head">
-      <h2 class="section__title">Nos collections</h2>
-    </div>
-    <div class="split">
-      <a class="tile" href="boutique.html?cat=tshirts">
-        <img src="assets/img/site/look-dos-dakar.jpg" alt="Dos d’un t-shirt Mbedüm Ndakaru imprimé Dakar, devant un conteneur bleu" srcset="assets/img/site/look-dos-dakar-400w.jpg 400w, assets/img/site/look-dos-dakar.jpg 720w" sizes="(min-width: 720px) 50vw, 100vw" width="720" loading="lazy" decoding="async">
-        <div class="tile__body">
-          <h3 class="tile__title">T-shirts</h3>
-          <p class="tile__text">Coton lourd, sérigraphie vintage. Dès 10 000 FCFA.</p>
-        </div>
-      </a>
-      <a class="tile" href="boutique.html?cat=hoodies">
-        <img src="assets/img/site/look-hoodies-rouge.jpg" alt="Trois hoodies Mbedüm Ndakaru bordeaux, blanc et noir sur fond rouge" srcset="assets/img/site/look-hoodies-rouge-400w.jpg 400w, assets/img/site/look-hoodies-rouge.jpg 720w" sizes="(min-width: 720px) 50vw, 100vw" width="720" loading="lazy" decoding="async">
-        <div class="tile__body">
-          <h3 class="tile__title">Hoodies</h3>
-          <p class="tile__text">Molleton épais, broderie et patch. Dès 15 000 FCFA.</p>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- la marque -->
-  <section class="banner">
-    <img src="assets/img/site/look-groupe.jpg" alt="Cinq modèles en t-shirts et hoodies Mbedüm Ndakaru devant une devanture en bois à Dakar" srcset="assets/img/site/look-groupe-400w.jpg 400w, assets/img/site/look-groupe-800w.jpg 800w, assets/img/site/look-groupe.jpg 1080w" sizes="100vw" width="1080" loading="lazy" decoding="async">
-    <div class="banner__body">
-      <span class="banner__kicker">La marque</span>
-      <h2 class="banner__title">Porté dans la ville, pas en studio</h2>
-      <p class="banner__text">Chaque pièce part d’un détail de Dakar : un marché, une gare, une pièce de monnaie, un mot en wolof.</p>
-      <a class="btn btn--light" href="marque.html">Notre histoire</a>
-    </div>
-  </section>
-
-</main>
-
-<!-- réassurance -->
-<section class="assurance">
-  <div class="assurance__item">
-    <h3 class="assurance__title">Livraison à Dakar</h3>
-    <p class="assurance__text">Partout à Dakar et dans les régions.</p>
-  </div>
-  <div class="assurance__item">
-    <h3 class="assurance__title">Paiement à la livraison</h3>
-    <p class="assurance__text">Vous payez en recevant votre commande, en main propre.</p>
-  </div>
-  <div class="assurance__item">
-    <h3 class="assurance__title">Échange sous 7 jours</h3>
-    <p class="assurance__text">Taille qui ne va pas ? On l’échange, pièce non portée.</p>
-  </div>
-</section>
-
-<!-- newsletter -->
-<section class="member">
-  <div class="member__inner">
-    <div>
-      <h2 class="member__title">Newsletter</h2>
-      <p class="member__text">Les nouvelles pièces, les dates de drops et les ventes réservées aux abonnés.</p>
-      <ul class="member__list">
-        <li>Accès prioritaire aux nouveautés</li>
-        <li>Invitations aux événements à Dakar</li>
-        <li>Offres réservées aux abonnés</li>
-      </ul>
-    </div>
-    <form class="form" data-fake-form data-ok="Merci, votre inscription est enregistrée.">
-      <div class="form__row">
-        <input class="field" type="text" name="nom" placeholder="Nom" required>
-        <input class="field" type="tel" name="tel" placeholder="Téléphone">
-      </div>
-      <input class="field" type="email" name="email" placeholder="Email" required>
-      <button class="btn btn--wide" type="submit">S’inscrire</button>
-      <p class="form__note">En vous inscrivant, vous acceptez nos conditions et notre politique de confidentialité.</p>
-      <p class="form__ok" data-form-ok></p>
-    </form>
-  </div>
-</section>
-
-<!-- pied de page -->
-<footer class="footer">
-  <div class="footer__cols">
-    <div class="footer__brand">
-      <div class="footer__word">Mbedüm Ndakaru</div>
-      <p class="footer__tag">Vêtements inspirés de Dakar, depuis 1988.<br>Dakar, Sénégal.</p>
-    </div>
-    <div>
-      <h4>Boutique</h4>
-      <ul>
-        <li><a href="boutique.html">Toute la boutique</a></li>
-        <li><a href="boutique.html?cat=nouveau">Nouveautés</a></li>
-        <li><a href="boutique.html?cat=gainde">Gaïndé</a></li>
-        <li><a href="boutique.html?cat=tshirts">T-shirts</a></li>
-        <li><a href="boutique.html?cat=hoodies">Hoodies</a></li>
-        <li><a href="boutique.html?cat=promo">Promotions</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Service client</h4>
-      <ul>
-        <li><a href="contact.html">Nous contacter</a></li>
-        <li><a href="contact.html#livraison">Livraison</a></li>
-        <li><a href="contact.html#retours">Échanges &amp; retours</a></li>
-        <li><a href="marque.html">La marque</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Nous suivre</h4>
-      <ul>
-        <li><a href="https://www.instagram.com/mbedum_ndakaru" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="https://www.tiktok.com/@mbedum_ndakaru" target="_blank" rel="noopener">TikTok</a></li>
-        <li><a href="https://wa.me/221789271531" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="mailto:contact@mbedumndakaru.com">contact@mbedumndakaru.com</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer__bottom">
-    <span>© <span data-year>2025</span> Mbedüm Ndakaru</span>
-    <span class="footer__pay"><span>Espèces</span><span>Wave</span><span>Orange Money</span><span>Free Money</span></span>
-  </div>
-</footer>
-
-<!-- panneaux -->
-<div class="scrim" data-scrim></div>
-
-<aside class="drawer" data-cart-drawer aria-label="Panier">
-  <div class="drawer__head">
-    <span>Panier <span class="count" data-cart-count></span></span>
-    <button type="button" data-close aria-label="Fermer">✕</button>
-  </div>
-  <div class="drawer__body" data-cart-body></div>
-  <div class="drawer__foot">
-    <div class="drawer__total"><span>Total</span><span data-cart-total>0 FCFA</span></div>
-    <button class="btn btn--wide" type="button" data-checkout disabled>Commander sur WhatsApp</button>
-    <p class="drawer__note">Frais de livraison confirmés lors de la commande.</p>
-  </div>
-</aside>
-
-<nav class="menu" data-menu aria-label="Menu">
-  <div class="drawer__head">
-    <span>Menu</span>
-    <button type="button" data-close aria-label="Fermer">✕</button>
-  </div>
-  <div class="menu__body">
-    <a href="index.html">Accueil</a>
-    <a href="boutique.html">Toute la boutique</a>
-    <a href="boutique.html?cat=nouveau">Nouveautés</a>
-    <a href="boutique.html?cat=gainde">Gaïndé</a>
-    <a href="boutique.html?cat=tshirts">T-shirts</a>
-    <a href="boutique.html?cat=hoodies">Hoodies</a>
-    <a href="boutique.html?cat=promo">Promotions</a>
-    <a href="marque.html">La marque</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</nav>
-
-<div class="search" data-search aria-label="Recherche">
-  <div class="search__bar">
-    <input class="search__input" type="search" placeholder="Rechercher une pièce" aria-label="Rechercher">
-    <button type="button" data-close aria-label="Fermer">✕</button>
-  </div>
-  <div class="search__results" data-search-results></div>
-</div>
-
-<script src="assets/js/config.js"></script>
-<script src="data/images.js"></script>
-<script src="data/products.js"></script>
-<script src="assets/js/app.js"></script>
+  <main class="bloc">
+    <div class="logo">Mbedüm Ndakaru</div>
+    <span class="rule"></span>
+    <p>Le site est momentanément indisponible.</p>
+  </main>
 </body>
 </html>

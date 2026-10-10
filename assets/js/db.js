@@ -9,7 +9,7 @@
    commandes, messages et inscriptions ne sont simplement pas enregistrés. */
 window.NDK_SUPABASE = {
   url: 'https://lqrljynvoumnolaxzgdr.supabase.co',
-  anonKey: ''
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxcmxqeW52b3Vtbm9sYXh6Z2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE2NTY0ODAsImV4cCI6MjEwNzIzMjQ4MH0.M63xBF1TLYr9QJQqfF400eohaFv9MzHL6MMu4YccWMU'
 };
 
 (function () {

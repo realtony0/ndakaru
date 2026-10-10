@@ -53,6 +53,11 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--text-dark); margin: 0; 
 .lock .steps { font-size: 13.5px; }
 .lock__note { margin: 4px 0 0; color: var(--text-light); font-size: 12px; }
 
+.boot { min-height: 100vh; display: grid; place-items: center; padding: 16px; background: var(--primary); }
+.boot__box { width: 100%; max-width: 360px; background: var(--surface); border-radius: 14px; padding: 28px 24px; text-align: center; display: grid; gap: 10px; }
+.boot__box p { margin: 0; color: var(--text-light); line-height: 1.7; }
+.boot__box .btn { margin-top: 8px; }
+
 /* ---------------------------------------------------------------- layout */
 
 .app { min-height: 100vh; }

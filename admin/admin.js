@@ -1359,7 +1359,10 @@
 
   /* --------------------------------------------------------- authentification */
 
+  function hideBoot() { $('[data-boot]').hidden = true; }
+
   function showLogin(message, isError) {
+    hideBoot();
     $('[data-app]').hidden = true;
     $('[data-lock]').hidden = false;
     $('[data-login]').hidden = false;
@@ -1371,6 +1374,7 @@
 
   function showApp(user) {
     me = user;
+    hideBoot();
     $('[data-lock]').hidden = true;
     $('[data-app]').hidden = false;
     route();
@@ -1391,6 +1395,8 @@
 
   function init() {
     if (!CFG.url || !CFG.anonKey || !window.supabase) {
+      if (CFG.anonKey && !window.supabase) return; // bibliothèque absente : le filet de index.html l'explique
+      hideBoot();
       $('[data-lock]').hidden = false;
       $('[data-login]').hidden = true;
       $('[data-setup]').hidden = false;

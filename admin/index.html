@@ -5,12 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Admin — Mbedüm Ndakaru</title>
+<script>
+  /* « /admin » sans barre finale casse les chemins relatifs (admin.css, ../data…) */
+  if (/\/admin$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="admin.css">
 </head>
 <body>
+
+<!-- visible tant que l'admin démarre : jamais de page blanche -->
+<div class="boot" data-boot>
+  <div class="boot__box">
+    <div class="lock__logo">mbedüm:ndakaru</div>
+    <p data-boot-msg>Chargement de l’admin…</p>
+  </div>
+</div>
 
 <!-- connexion -->
 <div class="lock" data-lock hidden>
@@ -71,5 +83,23 @@
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/db.js"></script>
 <script src="admin.js"></script>
+<script>
+  /* filet de sécurité : si un script n'a pas pu se charger, on dit pourquoi */
+  (function () {
+    function show(msg) {
+      var box = document.querySelector('[data-boot]'), el = document.querySelector('[data-boot-msg]');
+      if (!box || box.hidden) return;
+      el.innerHTML = msg;
+    }
+    window.addEventListener('error', function (e) {
+      show('L’admin n’a pas pu démarrer.<br><small>' + String(e.message || 'fichier introuvable').replace(/</g, '&lt;') + '</small><br><button class="btn" onclick="location.reload()">Réessayer</button>');
+    });
+    setTimeout(function () {
+      var missing = !window.supabase ? 'la bibliothèque Supabase (connexion internet ?)' : !window.NDK_SUPABASE ? 'le fichier assets/js/db.js' : '';
+      show(missing ? 'Impossible de charger ' + missing + '.<br><button class="btn" onclick="location.reload()">Réessayer</button>'
+        : 'Connexion à la base plus longue que prévu…<br><button class="btn" onclick="location.reload()">Réessayer</button>');
+    }, 8000);
+  })();
+</script>
 </body>
 </html>

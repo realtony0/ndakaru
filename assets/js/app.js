@@ -5,6 +5,7 @@
 
   var PRODUCTS = window.PRODUCTS || [];
   var STORE = window.STORE_CONFIG || {};
+  var DB = window.NDK_DB || null;
   var CART_KEY = 'mbedum_cart_v1';
 
   /* ---------------------------------------------------------------- utils */
@@ -154,11 +155,12 @@
     if (checkout) checkout.disabled = !cart.length;
   }
 
-  function checkoutMessage() {
+  function checkoutMessage(ref) {
     var lines = cart.map(function (l) {
       return '• ' + l.title + ' — ' + l.color + ' / ' + l.size + ' × ' + l.qty + ' = ' + money(l.price * l.qty);
     });
     return 'Bonjour mbedüm ndakaru, je souhaite commander :\n\n' +
+      (ref ? 'Réf. commande : ' + ref + '\n\n' : '') +
       lines.join('\n') +
       '\n\nTotal : ' + money(cartTotal()) +
       '\n\nNom :\nAdresse de livraison :';
@@ -456,8 +458,11 @@
 
   function goCheckout() {
     if (!cart.length) return;
+    // la référence relie le message WhatsApp à la commande enregistrée dans l'admin
+    var ref = DB && DB.enabled ? DB.newRef() : '';
+    if (ref) DB.saveOrder(ref, cart);
     var phone = (STORE.whatsapp || '').replace(/[^0-9]/g, '');
-    var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(checkoutMessage());
+    var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(checkoutMessage(ref));
     window.open(url, '_blank', 'noopener');
   }
 
@@ -493,6 +498,8 @@
     $$('[data-fake-form]').forEach(function (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        var d = new FormData(form);
+        if (DB && d.get('email')) DB.subscribe(String(d.get('email')).trim(), d.get('nom'), d.get('tel'));
         var note = $('[data-form-ok]', form);
         if (note) note.textContent = form.getAttribute('data-ok') || 'merci, message bien reçu.';
         form.reset();
@@ -508,6 +515,7 @@
           'Nom : ' + (d.get('nom') || '') + '\n' +
           'Email : ' + (d.get('email') || '') + '\n\n' +
           (d.get('message') || '');
+        if (DB) DB.sendMessage(d.get('nom'), d.get('email'), d.get('message'));
         var phone = (STORE.whatsapp || '').replace(/[^0-9]/g, '');
         window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });
@@ -529,6 +537,13 @@
       bar.classList.add('is-hidden');
       try { sessionStorage.setItem('mbedum_bar_closed', '1'); } catch (e) {}
     });
+
+    // messages modifiables dans l'admin : la base remplace le texte écrit dans la page
+    var marquee = $('.bar__marquee', bar);
+    if (marquee && STORE.fromDb && STORE.announcements && STORE.announcements.length) {
+      var spans = STORE.announcements.map(function (m) { return '<span>' + esc(m) + '</span>'; }).join('');
+      marquee.innerHTML = spans + spans; // deux fois, pour un défilement sans couture
+    }
 
     var msgEl = $('[data-bar-msg]', bar);
     var msgs = (STORE.announcements || []);
@@ -611,6 +626,16 @@
     renderCart();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  // catalogue et réglages viennent de la base quand elle est branchée (db.js)
+  function start() {
+    var ready = DB ? DB.load(3000) : Promise.resolve(false);
+    ready.then(function () {
+      PRODUCTS = window.PRODUCTS || PRODUCTS;
+      STORE = window.STORE_CONFIG || STORE;
+      boot();
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 })();

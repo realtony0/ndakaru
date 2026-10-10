@@ -12,23 +12,24 @@ Supabase → **SQL Editor** → **New query** :
 
 Les deux scripts peuvent être relancés sans risque : ils n’effacent rien.
 
-## 2. Créer votre compte administrateur
+## 2. Compte administrateur
 
-1. **Authentication → Users → Add user → Create new user** : votre email + un mot de passe solide,
-   cocher **Auto Confirm User**.
-2. **SQL Editor**, en remplaçant par votre email :
+L’admin s’ouvre avec **un mot de passe seul**. En coulisse, Supabase utilise un compte unique,
+`admin@mbedumndakaru.com` (réglé dans `assets/js/db.js`, champ `adminEmail`). Cette adresse n’a pas
+besoin d’exister : aucun email n’est envoyé.
+
+1. **Authentication → Users → Add user → Create new user** : `admin@mbedumndakaru.com` + le mot de
+   passe choisi, cocher **Auto Confirm User**.
+2. **SQL Editor** :
 
    ```sql
-   insert into public.admins (email) values ('votre-email@exemple.com');
+   insert into public.admins (email) values ('admin@mbedumndakaru.com');
    ```
 
-Seules les adresses de la table `admins` ont accès à l’admin. Pour ajouter un associé : même chose
-avec son email.
+3. **Authentication → Sign In / Providers** : désactiver **Allow new users to sign up**.
 
-3. **Authentication → Sign In / Providers** : désactiver **Allow new users to sign up**. Personne ne
-   pourra se créer de compte de lui-même.
-4. **Authentication → URL Configuration** : mettre l’adresse du site dans **Site URL** et ajouter
-   `https://votre-site/admin/` dans **Redirect URLs** (nécessaire pour « mot de passe oublié »).
+Changer le mot de passe : dans l’admin, **Réglages → Mon compte**. En cas d’oubli : Supabase →
+**Authentication → Users** → `admin@mbedumndakaru.com` → modifier le mot de passe.
 
 ## 3. Brancher le site
 

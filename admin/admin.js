@@ -1333,9 +1333,8 @@
           '<div class="form-actions"><button class="btn btn--primary" type="submit">Enregistrer les réglages</button></div>' +
         '</form>' +
         '<div class="card"><div class="card__head"><h2>Mon compte</h2></div><div class="card__body">' +
-          '<form class="fields fields--2" data-pw style="align-items:end"><label class="field"><span>Nouveau mot de passe</span><input class="input" type="password" name="pw" minlength="8" autocomplete="new-password" required></label>' +
+          '<form class="fields fields--2" data-pw style="align-items:end"><label class="field"><span>Nouveau mot de passe de l’admin</span><input class="input" type="password" name="pw" minlength="6" autocomplete="new-password" required></label>' +
           '<div><button class="btn" type="submit">Changer le mot de passe</button></div></form>' +
-          '<p class="help" style="margin:12px 0 0">Connecté en tant que ' + esc(me && me.email) + '.</p>' +
         '</div></div>';
 
       var form = $('[data-form]');
@@ -1374,7 +1373,6 @@
     me = user;
     $('[data-lock]').hidden = true;
     $('[data-app]').hidden = false;
-    $('[data-user]').textContent = user.email;
     route();
     // pastilles du menu : commandes nouvelles et messages non traités
     Promise.all([api.orders(), api.messages()]).then(function (r) { refreshCounts(r[0], r[1]); }, function () {});
@@ -1426,19 +1424,11 @@
       var f = this, btn = $('[type=submit]', f);
       btn.disabled = true;
       $('[data-login-error]').textContent = '';
-      sb.auth.signInWithPassword({ email: f.email.value.trim(), password: f.password.value }).then(function (r) {
+      sb.auth.signInWithPassword({ email: CFG.adminEmail, password: f.password.value }).then(function (r) {
         btn.disabled = false;
-        if (r.error) { showLogin(/invalid/i.test(r.error.message) ? 'Email ou mot de passe incorrect.' : r.error.message); return; }
+        if (r.error) { showLogin(/invalid/i.test(r.error.message) ? 'Mot de passe incorrect.' : r.error.message); return; }
         f.password.value = '';
         enter(r.data.session);
-      });
-    });
-
-    $('[data-forgot]').addEventListener('click', function () {
-      var email = $('[data-login]').email.value.trim();
-      if (!email) { showLogin('Saisissez d’abord votre email.'); return; }
-      sb.auth.resetPasswordForEmail(email, { redirectTo: location.href.split('#')[0] }).then(function (r) {
-        showLogin(r.error ? r.error.message : 'Si ce compte existe, un lien de réinitialisation vient d’être envoyé.', r.error ? true : false);
       });
     });
 

@@ -17,12 +17,9 @@
   <form class="lock__box" data-login>
     <div class="lock__logo">mbedüm:ndakaru</div>
     <h1 class="lock__title">Administration</h1>
-    <p class="lock__hint" data-login-hint>Connectez-vous avec votre compte administrateur.</p>
-    <label class="field"><span>Email</span><input class="input" type="email" name="email" autocomplete="username" required></label>
-    <label class="field"><span>Mot de passe</span><input class="input" type="password" name="password" autocomplete="current-password" required></label>
+    <label class="field"><span>Mot de passe</span><input class="input" type="password" name="password" autocomplete="current-password" required autofocus></label>
     <p class="lock__error" data-login-error></p>
-    <button class="btn btn--primary btn--block" type="submit">Se connecter</button>
-    <button class="btn btn--ghost btn--block btn--sm" type="button" data-forgot>Mot de passe oublié</button>
+    <button class="btn btn--primary btn--block" type="submit">Entrer</button>
   </form>
   <div class="lock__box" data-setup hidden>
     <div class="lock__logo">mbedüm:ndakaru</div>
@@ -51,7 +48,6 @@
     </nav>
     <div class="side__foot">
       <a href="../index.html" target="_blank" rel="noopener">Voir le site ↗</a>
-      <span class="side__user" data-user></span>
       <button type="button" data-logout>Se déconnecter</button>
     </div>
   </aside>

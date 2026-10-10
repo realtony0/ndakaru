@@ -183,6 +183,10 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--text-dark); margin: 0; 
 
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
 .toolbar .input { flex: 1 1 220px; max-width: 360px; }
+.bulk { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 14px; margin-bottom: 12px; border-radius: var(--radius); background: var(--primary); color: #fff; }
+.bulk span { font-weight: 500; margin-right: 4px; }
+.bulk .select { width: auto; min-height: 32px; padding: 4px 10px; }
+.bulk .btn--ghost { color: #fff; }
 .tabs { display: flex; gap: 4px; overflow-x: auto; margin-bottom: 12px; border-bottom: 1px solid var(--line); scrollbar-width: none; }
 .tabs button { padding: 8px 12px; font-weight: 500; color: var(--text-light); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
 .tabs button.is-on { color: var(--text-dark); border-color: var(--text-dark); }

@@ -58,6 +58,30 @@ drop policy if exists products_write on public.products;
 create policy products_write on public.products for all to authenticated
   using (public.is_admin()) with check (public.is_admin());
 
+-- ------------------------------------------------------------------ catégories
+-- Rubriques de la boutique : menu, filtres, badge sur les cartes. Un produit
+-- peut appartenir à plusieurs catégories (products.categories = liste de slugs).
+
+create table if not exists public.categories (
+  slug        text primary key check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
+  name        text not null check (length(name) between 1 and 80),
+  description text not null default '' check (length(description) <= 400),
+  badge       text not null default '' check (length(badge) <= 40),
+  position    integer not null default 0,
+  in_menu     boolean not null default true,
+  in_filters  boolean not null default true,
+  created_at  timestamptz not null default now()
+);
+alter table public.categories enable row level security;
+
+drop policy if exists categories_read on public.categories;
+create policy categories_read on public.categories for select using (true);
+drop policy if exists categories_write on public.categories;
+create policy categories_write on public.categories for all to authenticated
+  using (public.is_admin()) with check (public.is_admin());
+
+alter table public.products add column if not exists categories jsonb not null default '[]'::jsonb;
+
 -- ------------------------------------------------------------------ réglages (une seule ligne)
 
 create table if not exists public.settings (

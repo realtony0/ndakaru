@@ -52,6 +52,7 @@ de contact et les inscriptions à la newsletter y sont enregistrés.
 | Tableau de bord | chiffre d’affaires, commandes, panier moyen, ventes par jour, meilleures ventes, points à surveiller |
 | Commandes | commandes du site (avec leur référence WhatsApp) et saisies à la main ; statut, paiement, livraison, remise, historique, message WhatsApp au client, export CSV |
 | Produits | créer, modifier, dupliquer, masquer, réordonner ; photos téléversées (réduites automatiquement), tailles, couleurs, photo par couleur, promotions |
+| Catégories | créer, renommer, supprimer, ordonner les rubriques ; choisir celles du menu et des filtres ; description et badge (« Nouveauté »…) ; ranger plusieurs produits d’un coup depuis la liste Produits |
 | Clients | regroupés par téléphone : nombre de commandes, total dépensé, export CSV |
 | Messages | formulaire de contact : à traiter / traités |
 | Newsletter | abonnés, copie des emails, export CSV |

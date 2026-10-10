@@ -59,6 +59,7 @@ window.NDK_SUPABASE = {
       sizes: r.sizes || [],
       colors: r.colors || [],
       colorImages: r.color_images || {},
+      categories: r.categories || [],
       sourceSlug: r.source_slug
     };
   }
@@ -69,9 +70,11 @@ window.NDK_SUPABASE = {
     if (!on) return Promise.resolve(false);
     var data = Promise.all([
       get('products?select=*&published=eq.true&order=position.asc,created_at.asc'),
-      get('settings?select=data&id=eq.1')
+      get('settings?select=data&id=eq.1'),
+      get('categories?select=*&order=position.asc,created_at.asc')
     ]).then(function (res) {
       if (res[0].length) window.PRODUCTS = res[0].map(toProduct);
+      if (res[2].length) window.CATEGORIES = res[2];
       if (res[1][0] && res[1][0].data) {
         var s = res[1][0].data, store = window.STORE_CONFIG = window.STORE_CONFIG || {};
         for (var k in s) store[k] = s[k];

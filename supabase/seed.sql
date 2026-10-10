@@ -68,3 +68,16 @@ on conflict (slug) do nothing;
 
 insert into public.settings (id, data) values (1, '{"name": "mbedüm ndakaru", "tagline": "vêtements inspirés de Dakar", "since": "1988", "email": "contact@mbedumndakaru.com", "phone": "+221 78 927 15 31", "whatsapp": "221789271531", "instagram": "https://www.instagram.com/mbedum_ndakaru", "tiktok": "https://www.tiktok.com/@mbedum_ndakaru", "city": "Dakar, Sénégal", "announcements": ["Promo été : jusqu’à 2 000 FCFA d’économie", "Livraison partout à Dakar · paiement à la livraison", "Gaïndé — nouvelle collection disponible"], "deliveryFee": 0}'::jsonb)
 on conflict (id) do nothing;
+
+-- catégories de départ : celles du menu actuel (+ « Héritage », hors menu)
+insert into public.categories (slug, name, description, badge, position, in_menu, in_filters) values
+  ('nouveau',  'Nouveautés', 'Les dernières pièces sorties de l’atelier.', 'Nouveauté', 0, true,  true),
+  ('gainde',   'Gaïndé',     'La collection Gaïndé et Sunugaal.',          'Nouveauté', 1, true,  true),
+  ('tshirts',  'T-shirts',   'T-shirts sérigraphiés, coupes unisexes du M au 4XL.', '', 2, true, true),
+  ('hoodies',  'Hoodies',    'Hoodies sérigraphiés, coupes unisexes du M au 4XL.',  '', 3, true, true),
+  ('heritage', 'Héritage',   'Les pièces qui ont fait la marque.',          '', 4, false, false)
+on conflict (slug) do nothing;
+
+-- chaque produit sans catégorie reçoit son type (t-shirt / hoodie) et sa collection
+update public.products set categories = jsonb_build_array(category, collection)
+where categories = '[]'::jsonb;

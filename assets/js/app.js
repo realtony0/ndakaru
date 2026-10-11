@@ -673,6 +673,7 @@
   }
 
   function boot() {
+    if (DB && window.CONTENT) DB.applyContent(window.CONTENT);
     renderCategoryLinks();
     initBar();
     initHeader();

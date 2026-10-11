@@ -227,6 +227,16 @@
     setCategoryPosition: function (slug, position) { return q(sb.from('categories').update({ position: position }).eq('slug', slug)); },
     setProductCategories: function (slug, cats) { return q(sb.from('products').update({ categories: cats }).eq('slug', slug)); },
 
+    content: function () {
+      return q(sb.from('content').select('key,value')).then(function (rows) {
+        var map = {};
+        rows.forEach(function (r) { map[r.key] = r.value; });
+        return map;
+      });
+    },
+    saveContent: function (rows) { return rows.length ? q(sb.from('content').upsert(rows)) : Promise.resolve(); },
+    deleteContent: function (keys) { return keys.length ? q(sb.from('content').delete().in('key', keys)) : Promise.resolve(); },
+
     orders: function () { return q(sb.from('orders').select('*').order('created_at', { ascending: false }).limit(2000)); },
     order: function (id) { return q(sb.from('orders').select('*').eq('id', id).maybeSingle()); },
     saveOrder: function (row, id) {
@@ -302,6 +312,7 @@
     'commandes': pageOrders,
     'produits': pageProducts,
     'categories': pageCategories,
+    'contenu': pageContent,
     'clients': pageClients,
     'messages': pageMessages,
     'abonnes': pageSubscribers,
@@ -1361,6 +1372,251 @@
         toast(isNew ? 'Catégorie « ' + name + ' » créée' : 'Catégorie enregistrée');
         route();
       }, fail);
+    });
+  }
+
+  /* ---------------------------------------------------------- contenu du site */
+
+  var CONTENT_PAGES = [
+    { k: 'accueil', l: 'Accueil', file: 'index.html' },
+    { k: 'boutique', l: 'Boutique', file: 'boutique.html' },
+    { k: 'produit', l: 'Fiche produit', file: 'produit.html' },
+    { k: 'marque', l: 'La marque', file: 'marque.html' },
+    { k: 'contact', l: 'Contact', file: 'contact.html' },
+    { k: 'commun', l: 'Commun à toutes les pages', file: 'index.html' }
+  ];
+  var REGION_LABELS = {
+    'commun.header': 'En-tête', 'commun.menu': 'Menu mobile', 'commun.drawer': 'Panier',
+    'commun.assurance': 'Bandeau de réassurance', 'commun.member': 'Bloc newsletter', 'commun.footer': 'Pied de page'
+  };
+  var pageDocs = {};
+
+  /* la page du site elle-même sert de référence : ses textes sont les valeurs d'origine */
+  function fetchPage(file) {
+    if (pageDocs[file]) return Promise.resolve(pageDocs[file]);
+    return fetch('../' + file, { cache: 'no-cache' }).then(function (r) {
+      if (!r.ok) throw new Error('Page ' + file + ' introuvable');
+      return r.text();
+    }).then(function (t) { return (pageDocs[file] = new DOMParser().parseFromString(t, 'text/html')); });
+  }
+
+  function plainText(el) {
+    var c = el.cloneNode(true);
+    $$('br', c).forEach(function (br) { br.replaceWith('\n'); });
+    return c.textContent.split('\n').map(function (l) { return l.replace(/\s+/g, ' ').trim(); }).join('\n').trim();
+  }
+
+  function fieldLabel(el) {
+    var t = el.tagName.toLowerCase(), c = el.classList;
+    if (t === 'img') return 'Image';
+    if (t === 'h1') return 'Grand titre';
+    if (t === 'h2') return 'Titre';
+    if (t === 'h3') return 'Sous-titre';
+    if (t === 'h4') return 'Titre de colonne';
+    if (t === 'li') return 'Élément de liste';
+    if (t === 'figcaption') return 'Légende de la photo';
+    if (t === 'a') return c.contains('btn') ? 'Bouton' : c.contains('logo') ? 'Logo (texte)' : 'Lien';
+    if (t === 'span') return /kicker/.test(el.className) ? 'Surtitre' : 'Libellé';
+    if (c.contains('fact__k')) return 'Chiffre clé';
+    if (c.contains('fact__v')) return 'Légende du chiffre';
+    if (c.contains('acc__panel')) return 'Texte du volet';
+    if (c.contains('footer__word')) return 'Nom de la marque';
+    return 'Texte';
+  }
+
+  function pageContent(args) {
+    var tab = args[0] && CONTENT_PAGES.some(function (p) { return p.k === args[0]; }) ? args[0] : 'accueil';
+    var def = CONTENT_PAGES.filter(function (p) { return p.k === tab; })[0];
+    return Promise.all([api.content(), fetchPage(def.file)]).then(function (r) { drawContent(tab, def, r[0], r[1]); });
+  }
+
+  function drawContent(tab, def, saved, doc) {
+    var fields = [];
+    if (tab !== 'commun') {
+      var meta = doc.querySelector('meta[name="description"]');
+      fields.push({ key: tab + '.seo.title', group: 'seo', type: 'text', label: 'Titre de la page (onglet du navigateur, Google)', def: { text: doc.title } });
+      fields.push({ key: tab + '.seo.description', group: 'seo', type: 'text', long: true, label: 'Description pour Google', def: { text: meta ? meta.getAttribute('content') : '' } });
+    }
+    $$('[data-edit], [data-edit-img]', doc).forEach(function (el) {
+      var key = el.getAttribute('data-edit') || el.getAttribute('data-edit-img');
+      if (key.indexOf(tab + '.') !== 0) return;
+      var isImg = el.hasAttribute('data-edit-img');
+      var text = isImg ? '' : plainText(el);
+      fields.push({
+        key: key, el: el, group: key.split('.').slice(0, 2).join('.'), type: isImg ? 'img' : 'text', label: fieldLabel(el),
+        link: el.tagName === 'A', long: !isImg && (text.length > 60 || text.indexOf('\n') > -1 || /^(P|DIV)$/.test(el.tagName)),
+        def: isImg ? { src: el.getAttribute('src'), alt: el.getAttribute('alt') || '' } : { text: text, href: el.getAttribute('href') || '' }
+      });
+    });
+
+    /* une section prend le nom de son premier titre */
+    var groups = [], byGroup = {};
+    fields.forEach(function (f) {
+      if (!byGroup[f.group]) { byGroup[f.group] = []; groups.push(f.group); }
+      byGroup[f.group].push(f);
+    });
+    function groupLabel(g, i) {
+      if (g === 'seo') return 'Référencement';
+      if (REGION_LABELS[g]) return REGION_LABELS[g];
+      var h = byGroup[g].filter(function (f) { return f.el && /^H[1-3]$/.test(f.el.tagName); })[0];
+      return h ? '« ' + h.def.text + ' »' : 'Section ' + (i + 1);
+    }
+
+    var edits = {};
+    fields.forEach(function (f) { edits[f.key] = JSON.parse(JSON.stringify(saved[f.key] || {})); });
+    var touched = {};
+
+    function current(f) {
+      var e = edits[f.key];
+      return {
+        text: e.text != null ? e.text : f.def.text, href: e.href != null ? e.href : f.def.href,
+        src: e.src || f.def.src, alt: e.alt != null ? e.alt : f.def.alt, hidden: !!e.hidden
+      };
+    }
+    function isChanged(f) { return Object.keys(edits[f.key]).length > 0; }
+
+    function fieldHTML(f) {
+      var c = current(f), changed = isChanged(f);
+      var head = '<div class="cfield__head"><span class="label">' + esc(f.label) + '</span>' +
+        (changed ? '<span class="badge badge--accent badge--plain">Modifié</span>' : '') +
+        '<span class="cfield__tools">' +
+          (f.group !== 'seo' ? '<label class="check"><input type="checkbox" data-hide' + (c.hidden ? ' checked' : '') + '> Masquer</label>' : '') +
+          (changed ? '<button class="btn btn--sm btn--ghost" type="button" data-reset>Rétablir l’original</button>' : '') +
+        '</span></div>';
+      if (f.type === 'img') {
+        return '<div class="cfield cfield--img' + (c.hidden ? ' is-hidden' : '') + '" data-key="' + esc(f.key) + '">' + head +
+          '<div class="cfield__img"><img src="' + esc(thumbUrl(c.src)) + '" alt="">' +
+          '<div class="cfield__imgside"><div class="toolbar" style="margin:0"><button class="btn btn--sm" type="button" data-upload>Téléverser une photo</button>' +
+          '<button class="btn btn--sm" type="button" data-pick>Photos du site</button></div>' +
+          '<label class="field"><span>Description de l’image (accessibilité, Google)</span><input class="input" data-f="alt" value="' + esc(c.alt) + '"></label></div></div></div>';
+      }
+      var input = f.long
+        ? '<textarea class="textarea" data-f="text" rows="' + Math.min(6, Math.max(2, Math.ceil(c.text.length / 70))) + '" style="min-height:0">' + esc(c.text) + '</textarea>'
+        : '<input class="input" data-f="text" value="' + esc(c.text) + '">';
+      return '<div class="cfield' + (c.hidden ? ' is-hidden' : '') + '" data-key="' + esc(f.key) + '">' + head + input +
+        (f.link ? '<label class="field cfield__href"><span>Lien vers</span><input class="input" data-f="href" value="' + esc(c.href) + '" placeholder="boutique.html, https://…, mailto:…"></label>' : '') +
+        '</div>';
+    }
+
+    function draw() {
+      var nChanged = fields.filter(isChanged).length;
+      view().innerHTML =
+        '<div class="page-head"><div><h1>Contenu du site</h1><p>Textes, boutons, liens et images de chaque page. ' + nChanged + ' élément' + (nChanged > 1 ? 's' : '') + ' modifié' + (nChanged > 1 ? 's' : '') + ' ici.</p></div>' +
+          '<div class="page-head__actions"><a class="btn" href="../' + def.file + '" target="_blank" rel="noopener">Voir la page ↗</a></div></div>' +
+        '<div class="tabs">' + CONTENT_PAGES.map(function (p) {
+          return '<button type="button" data-tab="' + p.k + '" class="' + (p.k === tab ? 'is-on' : '') + '">' + esc(p.l) + '</button>';
+        }).join('') + '</div>' +
+        (tab === 'commun' ? '<p class="help" style="margin:0 0 12px">Ces blocs apparaissent sur toutes les pages : une modification s’applique partout.</p>' : '') +
+        (tab === 'boutique' ? '<p class="help" style="margin:0 0 12px">Le titre et la description de chaque catégorie se règlent dans <a href="#/categories">Catégories</a>.</p>' : '') +
+        (tab === 'produit' ? '<p class="help" style="margin:0 0 12px">Nom, prix, photos et description de chaque produit se règlent dans <a href="#/produits">Produits</a>. Ici : les textes communs à toutes les fiches.</p>' : '') +
+        groups.map(function (g, i) {
+          return '<div class="card"><div class="card__head"><h2>' + esc(groupLabel(g, i)) + '</h2></div><div class="card__body cfields">' +
+            byGroup[g].map(fieldHTML).join('') + '</div></div>';
+        }).join('') +
+        '<div class="form-actions"><span class="help spacer" data-pending></span>' +
+          '<button class="btn btn--primary" type="button" data-save disabled>Enregistrer les modifications</button></div>';
+      bind();
+    }
+
+    function fieldOf(node) {
+      var key = node.closest('[data-key]').getAttribute('data-key');
+      return fields.filter(function (f) { return f.key === key; })[0];
+    }
+    function touch(f) {
+      touched[f.key] = true;
+      markDirty();
+      var n = Object.keys(touched).length;
+      $('[data-save]').disabled = false;
+      $('[data-pending]').textContent = n + ' changement' + (n > 1 ? 's' : '') + ' à enregistrer';
+    }
+    /* ne garde que ce qui diffère de l'original */
+    function setValue(f, prop, value) {
+      var e = edits[f.key];
+      var orig = prop === 'hidden' ? false : f.def[prop];
+      if (value === orig || (prop === 'hidden' && !value)) delete e[prop]; else e[prop] = value;
+      touch(f);
+    }
+
+    function bind() {
+      $('.tabs', view()).addEventListener('click', function (e) {
+        var b = e.target.closest('[data-tab]');
+        if (b) location.hash = '#/contenu/' + b.getAttribute('data-tab');
+      });
+      view().querySelectorAll('.cfields').forEach(function (box) {
+        box.addEventListener('input', function (e) {
+          var p = e.target.getAttribute('data-f');
+          if (!p) return;
+          setValue(fieldOf(e.target), p, p === 'text' ? e.target.value.trim() : e.target.value.trim());
+        });
+        box.addEventListener('change', function (e) {
+          if (!e.target.matches('[data-hide]')) return;
+          var f = fieldOf(e.target);
+          setValue(f, 'hidden', e.target.checked);
+          e.target.closest('.cfield').classList.toggle('is-hidden', e.target.checked);
+        });
+        box.addEventListener('click', function (e) {
+          var f;
+          if (e.target.closest('[data-reset]')) {
+            f = fieldOf(e.target);
+            edits[f.key] = {};
+            touch(f);
+            e.target.closest('.cfield').outerHTML = fieldHTML(f);
+          } else if (e.target.closest('[data-upload]')) {
+            f = fieldOf(e.target);
+            var input = document.createElement('input');
+            input.type = 'file'; input.accept = 'image/*';
+            input.onchange = function () {
+              if (!input.files[0]) return;
+              toast('Envoi de la photo…');
+              api.upload('site', input.files[0]).then(function (url) {
+                setValue(f, 'src', url);
+                $('[data-key="' + f.key + '"] .cfield__img img').src = url;
+                toast('Photo prête — pensez à enregistrer');
+              }, fail);
+            };
+            input.click();
+          } else if (e.target.closest('[data-pick]')) {
+            f = fieldOf(e.target);
+            pickImage(current(f).src, function (src) {
+              setValue(f, 'src', src);
+              $('[data-key="' + f.key + '"] .cfield__img img').src = thumbUrl(src);
+            });
+          }
+        });
+      });
+      $('[data-save]').addEventListener('click', function () {
+        var up = [], del = [];
+        Object.keys(touched).forEach(function (k) {
+          if (Object.keys(edits[k]).length) up.push({ key: k, value: edits[k], updated_at: new Date().toISOString() });
+          else if (saved[k]) del.push(k);
+        });
+        var btn = this;
+        btn.disabled = true;
+        Promise.all([api.saveContent(up), api.deleteContent(del)]).then(function () {
+          dirty = false;
+          toast('Modifications en ligne');
+          route();
+        }, function (err) { btn.disabled = false; fail(err); });
+      });
+    }
+
+    draw();
+  }
+
+  /* choisir une photo déjà présente sur le site ou téléversée */
+  function pickImage(selected, cb) {
+    var pool = Object.keys(IMG).filter(function (k) { return k.indexOf('assets/img/') === 0; });
+    (cache.products || []).forEach(function (x) { x.images.forEach(function (s) { if (pool.indexOf(s) < 0) pool.push(s); }); });
+    if (selected && pool.indexOf(selected) < 0) pool.unshift(selected);
+    var box = openModal('<h2>Choisir une photo</h2><p>Photos du site et des produits.</p><div class="lib" data-lib>' +
+      pool.map(function (src) {
+        return '<button type="button" data-src="' + esc(src) + '" class="' + (src === selected ? 'is-on' : '') + '"><img src="' + esc(thumbUrl(src)) + '" alt="" loading="lazy"></button>';
+      }).join('') + '</div><div class="modal__actions"><button class="btn" type="button" data-modal-cancel>Annuler</button></div>', true);
+    $('[data-lib]', box).addEventListener('click', function (e) {
+      var b = e.target.closest('[data-src]');
+      if (!b) return;
+      closeModal();
+      cb(b.getAttribute('data-src'));
     });
   }
 

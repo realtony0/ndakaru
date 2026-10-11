@@ -71,8 +71,13 @@ window.NDK_SUPABASE = {
     var data = Promise.all([
       get('products?select=*&published=eq.true&order=position.asc,created_at.asc'),
       get('settings?select=data&id=eq.1'),
-      get('categories?select=*&order=position.asc,created_at.asc')
+      get('categories?select=*&order=position.asc,created_at.asc'),
+      get('content?select=key,value')
     ]).then(function (res) {
+      var content = {};
+      res[3].forEach(function (r) { content[r.key] = r.value; });
+      window.CONTENT = content;
+      try { localStorage.setItem(CONTENT_KEY, JSON.stringify(content)); } catch (e) {}
       if (res[0].length) window.PRODUCTS = res[0].map(toProduct);
       if (res[2].length) window.CATEGORIES = res[2];
       if (res[1][0] && res[1][0].data) {
@@ -86,6 +91,54 @@ window.NDK_SUPABASE = {
     return Promise.race([data, timer]).catch(function () { return false; });
   }
 
+  /* ---------------------------------------------------------- contenu des pages
+     Les éléments marqués data-edit / data-edit-img reçoivent le texte, le lien
+     ou l'image enregistrés dans l'admin. */
+  var CONTENT_KEY = 'ndk_content_v1';
+  var PAGE_KEYS = { '': 'accueil', 'index.html': 'accueil', 'boutique.html': 'boutique', 'produit.html': 'produit', 'marque.html': 'marque', 'contact.html': 'contact' };
+
+  function escText(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    }).replace(/\n/g, '<br>');
+  }
+
+  function safeHref(h) { return /^(https?:|mailto:|tel:|#|[a-z0-9._\/-]+(\.html)?([?#].*)?$)/i.test(h) && !/^javascript:/i.test(h); }
+
+  function applyContent(map) {
+    if (!map) return;
+    var els = document.querySelectorAll('[data-edit]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i], v = map[el.getAttribute('data-edit')];
+      if (!v) continue;
+      if (v.text != null) el.innerHTML = escText(v.text);
+      if (v.href && el.tagName === 'A' && safeHref(v.href)) el.setAttribute('href', v.href);
+      el.hidden = !!v.hidden;
+    }
+    var imgs = document.querySelectorAll('[data-edit-img]');
+    for (var j = 0; j < imgs.length; j++) {
+      var img = imgs[j], w = map[img.getAttribute('data-edit-img')];
+      if (!w) continue;
+      if (w.src) {
+        img.removeAttribute('srcset');
+        img.src = w.src;
+      }
+      if (w.alt != null) img.alt = w.alt;
+      // une image masquée retire aussi son cadre (figure, tuile…)
+      (img.closest('figure') || img).hidden = !!w.hidden;
+    }
+    var page = PAGE_KEYS[location.pathname.split('/').pop()];
+    var t = page && map[page + '.seo.title'], d = page && map[page + '.seo.description'];
+    if (t && t.text) document.title = t.text;
+    if (d && d.text) {
+      var meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute('content', d.text);
+    }
+  }
+
+  // contenu de la dernière visite, appliqué tout de suite pour éviter un éclair de l'ancien texte
+  if (on) { try { applyContent(JSON.parse(localStorage.getItem(CONTENT_KEY) || 'null')); } catch (e) {} }
+
   function newRef() {
     var c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', s = '';
     for (var i = 0; i < 6; i++) s += c[Math.floor(Math.random() * c.length)];
@@ -97,6 +150,7 @@ window.NDK_SUPABASE = {
     load: load,
     newRef: newRef,
     toProduct: toProduct,
+    applyContent: applyContent,
     saveOrder: function (ref, lines) {
       return insert('orders', {
         ref: ref,

@@ -82,6 +82,24 @@ create policy categories_write on public.categories for all to authenticated
 
 alter table public.products add column if not exists categories jsonb not null default '[]'::jsonb;
 
+-- ------------------------------------------------------------------ contenu des pages
+-- Textes, liens et images modifiés depuis l'admin (page « Contenu du site »).
+-- key = attribut data-edit / data-edit-img posé dans le HTML ; value =
+-- { text, href, src, alt, hidden }. Sans ligne, la page garde son texte d'origine.
+
+create table if not exists public.content (
+  key        text primary key check (key ~ '^[a-z0-9.-]+$' and length(key) <= 80),
+  value      jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+alter table public.content enable row level security;
+
+drop policy if exists content_read on public.content;
+create policy content_read on public.content for select using (true);
+drop policy if exists content_write on public.content;
+create policy content_write on public.content for all to authenticated
+  using (public.is_admin()) with check (public.is_admin());
+
 -- ------------------------------------------------------------------ réglages (une seule ligne)
 
 create table if not exists public.settings (

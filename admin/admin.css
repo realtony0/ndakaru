@@ -339,3 +339,16 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--text-dark); margin: 0; 
   .line__opts { grid-template-columns: 1fr 1fr; }
   .hide-sm { display: none; }
 }
+
+/* contenu du site */
+.cfields { display: grid; gap: 18px; }
+.cfield { display: grid; gap: 8px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.cfield:last-child { padding-bottom: 0; border-bottom: 0; }
+.cfield.is-hidden > :not(.cfield__head) { opacity: .4; }
+.cfield__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.cfield__tools { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--text-light); }
+.cfield__href span { font-weight: 400; color: var(--text-light); }
+.cfield__img { display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: start; }
+.cfield__img img { width: 120px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; background: var(--a5); }
+.cfield__imgside { display: grid; gap: 10px; }
+@media (max-width: 639px) { .cfield__img { grid-template-columns: 1fr; } .cfield__img img { width: 100%; } }

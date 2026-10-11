@@ -5,6 +5,7 @@
 
   var PRODUCTS = window.PRODUCTS || [];
   var STORE = window.STORE_CONFIG || {};
+  var DB = window.NDK_DB || null;
   var CART_KEY = 'mbedum_cart_v1';
 
   /* ---------------------------------------------------------------- utils */
@@ -50,6 +51,21 @@
 
   /* l'image de survol double le poids des grilles ; au tactile elle ne sert à rien */
   var HAS_HOVER = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* Catégories gérées dans l'admin (window.CATEGORIES, chargé par db.js).
+     Sans base, un produit appartient à son type et à sa collection. */
+  var CATS = null;
+
+  function inCat(p, slug) {
+    if (p.categories) return p.categories.indexOf(slug) > -1;
+    return p.category === slug || p.collection === slug;
+  }
+
+  function catBySlug(slug) {
+    if (!CATS) return null;
+    for (var i = 0; i < CATS.length; i++) if (CATS[i].slug === slug) return CATS[i];
+    return null;
+  }
 
   function bySlug(slug) {
     for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].slug === slug) return PRODUCTS[i];
@@ -154,11 +170,12 @@
     if (checkout) checkout.disabled = !cart.length;
   }
 
-  function checkoutMessage() {
+  function checkoutMessage(ref) {
     var lines = cart.map(function (l) {
       return '• ' + l.title + ' — ' + l.color + ' / ' + l.size + ' × ' + l.qty + ' = ' + money(l.price * l.qty);
     });
     return 'Bonjour mbedüm ndakaru, je souhaite commander :\n\n' +
+      (ref ? 'Réf. commande : ' + ref + '\n\n' : '') +
       lines.join('\n') +
       '\n\nTotal : ' + money(cartTotal()) +
       '\n\nNom :\nAdresse de livraison :';
@@ -215,6 +232,13 @@
 
   /* ---------------------------------------------------------------- cards */
 
+  // badge de la première catégorie du produit qui en a un (réglé dans l'admin)
+  function badgeLabel(p) {
+    if (!CATS) return (p.collection === 'gainde' || p.collection === 'nouveau') ? 'Nouveauté' : '';
+    for (var i = 0; i < CATS.length; i++) if (CATS[i].badge && inCat(p, CATS[i].slug)) return CATS[i].badge;
+    return '';
+  }
+
   function cardHTML(p) {
     var url = 'produit.html?p=' + encodeURIComponent(p.slug);
     var alt = p.images[1] || p.images[0];
@@ -225,9 +249,7 @@
     // le badge annonce l'économie réalisée plutôt qu'un simple « promo »
     var badge = onSale
       ? '<span class="card__badge">Économisez ' + money(p.compareAt - p.price) + '</span>'
-      : (p.collection === 'gainde' || p.collection === 'nouveau')
-        ? '<span class="card__badge card__badge--new">Nouveauté</span>'
-        : '';
+      : badgeLabel(p) ? '<span class="card__badge card__badge--new">' + esc(badgeLabel(p)) + '</span>' : '';
 
     return '' +
       '<article class="card">' +
@@ -260,9 +282,7 @@
         list = picked.split(',').map(function (s) { return bySlug(s.trim()); }).filter(Boolean);
       }
       else if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
-      else if (mode === 'gainde') list = list.filter(function (p) { return p.collection === 'gainde'; });
-      else if (mode === 'nouveau') list = list.filter(function (p) { return p.collection === 'nouveau'; });
-      else if (mode === 'hoodies' || mode === 'tshirts') list = list.filter(function (p) { return p.category === mode; });
+      else if (mode && mode !== 'all') list = list.filter(function (p) { return inCat(p, mode); });
 
       var exclude = el.getAttribute('data-exclude');
       if (exclude) list = list.filter(function (p) { return p.slug !== exclude; });
@@ -289,8 +309,8 @@
 
       var mode = root.getAttribute('data-carousel');
       var list = PRODUCTS.slice();
-      if (mode === 'gainde') list = list.filter(function (p) { return p.collection === 'gainde'; });
-      else if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
+      if (mode === 'promo') list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
+      else if (mode && mode !== 'all') list = list.filter(function (p) { return inCat(p, mode); });
       var max = parseInt(root.getAttribute('data-limit'), 10) || 8;
       if (!track.children.length) track.innerHTML = list.slice(0, max).map(cardHTML).join('');
 
@@ -313,18 +333,23 @@
     var grid = $('[data-shop-grid]');
     if (!grid) return;
 
+    // filtres : « Tout », les catégories cochées « filtres » dans l'admin, puis « Promotions »
+    var chips = $('.filters__chips');
+    if (chips && CATS) {
+      var shown = CATS.filter(function (c) { return c.in_filters; });
+      chips.innerHTML = '<button class="chip" type="button" data-cat="tout">Tout</button>' +
+        shown.map(function (c) { return '<button class="chip" type="button" data-cat="' + esc(c.slug) + '">' + esc(c.name) + '</button>'; }).join('') +
+        '<button class="chip" type="button" data-cat="promo">Promotions</button>';
+    }
+
     var state = { cat: param('cat') || 'tout', sort: 'defaut' };
 
     function apply() {
       var list = PRODUCTS.slice();
-      if (state.cat === 'tshirts' || state.cat === 'hoodies') {
-        list = list.filter(function (p) { return p.category === state.cat; });
-      } else if (state.cat === 'promo') {
+      if (state.cat === 'promo') {
         list = list.filter(function (p) { return p.compareAt && p.compareAt > p.price; });
-      } else if (state.cat === 'gainde') {
-        list = list.filter(function (p) { return p.collection === 'gainde'; });
-      } else if (state.cat === 'nouveau') {
-        list = list.filter(function (p) { return p.collection === 'nouveau'; });
+      } else if (state.cat !== 'tout') {
+        list = list.filter(function (p) { return inCat(p, state.cat); });
       }
       if (state.sort === 'prix-asc') list.sort(function (a, b) { return a.price - b.price; });
       if (state.sort === 'prix-desc') list.sort(function (a, b) { return b.price - a.price; });
@@ -334,9 +359,15 @@
       var c = $('[data-shop-count]');
       if (c) c.textContent = list.length + (list.length > 1 ? ' pièces' : ' pièce');
 
-      var label = { tout: 'Toute la boutique', tshirts: 'T-shirts', hoodies: 'Hoodies', promo: 'Promotions', gainde: 'Gaïndé', nouveau: 'Nouveautés' }[state.cat] || state.cat;
+      var cat = catBySlug(state.cat);
+      var label = cat ? cat.name : { tout: 'Toute la boutique', tshirts: 'T-shirts', hoodies: 'Hoodies', promo: 'Promotions', gainde: 'Gaïndé', nouveau: 'Nouveautés' }[state.cat] || state.cat;
       var t = $('[data-shop-title]');
       if (t) t.textContent = label;
+      var sub = $('.pagehead__sub');
+      if (sub) {
+        if (!sub.hasAttribute('data-default')) sub.setAttribute('data-default', sub.textContent);
+        sub.textContent = (cat && cat.description) || sub.getAttribute('data-default');
+      }
       document.title = label + ' — Mbedüm Ndakaru';
 
       $$('[data-cat]').forEach(function (b) {
@@ -456,8 +487,11 @@
 
   function goCheckout() {
     if (!cart.length) return;
+    // la référence relie le message WhatsApp à la commande enregistrée dans l'admin
+    var ref = DB && DB.enabled ? DB.newRef() : '';
+    if (ref) DB.saveOrder(ref, cart);
     var phone = (STORE.whatsapp || '').replace(/[^0-9]/g, '');
-    var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(checkoutMessage());
+    var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(checkoutMessage(ref));
     window.open(url, '_blank', 'noopener');
   }
 
@@ -476,7 +510,8 @@
         return;
       }
       var list = PRODUCTS.filter(function (p) {
-        return (p.title + ' ' + p.description + ' ' + p.category + ' ' + (p.collection || '')).toLowerCase().indexOf(q) > -1;
+        var names = (p.categories || []).map(function (c) { var k = catBySlug(c); return k ? k.name : c; }).join(' ');
+        return (p.title + ' ' + p.description + ' ' + p.category + ' ' + (p.collection || '') + ' ' + names).toLowerCase().indexOf(q) > -1;
       });
       results.innerHTML = list.length
         ? '<div class="grid">' + list.map(cardHTML).join('') + '</div>'
@@ -493,6 +528,8 @@
     $$('[data-fake-form]').forEach(function (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        var d = new FormData(form);
+        if (DB && d.get('email')) DB.subscribe(String(d.get('email')).trim(), d.get('nom'), d.get('tel'));
         var note = $('[data-form-ok]', form);
         if (note) note.textContent = form.getAttribute('data-ok') || 'merci, message bien reçu.';
         form.reset();
@@ -508,6 +545,7 @@
           'Nom : ' + (d.get('nom') || '') + '\n' +
           'Email : ' + (d.get('email') || '') + '\n\n' +
           (d.get('message') || '');
+        if (DB) DB.sendMessage(d.get('nom'), d.get('email'), d.get('message'));
         var phone = (STORE.whatsapp || '').replace(/[^0-9]/g, '');
         window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });
@@ -529,6 +567,13 @@
       bar.classList.add('is-hidden');
       try { sessionStorage.setItem('mbedum_bar_closed', '1'); } catch (e) {}
     });
+
+    // messages modifiables dans l'admin : la base remplace le texte écrit dans la page
+    var marquee = $('.bar__marquee', bar);
+    if (marquee && STORE.fromDb && STORE.announcements && STORE.announcements.length) {
+      var spans = STORE.announcements.map(function (m) { return '<span>' + esc(m) + '</span>'; }).join('');
+      marquee.innerHTML = spans + spans; // deux fois, pour un défilement sans couture
+    }
 
     var msgEl = $('[data-bar-msg]', bar);
     var msgs = (STORE.announcements || []);
@@ -597,7 +642,39 @@
     if (acc) acc.parentElement.classList.toggle('is-open');
   });
 
+  /* Menus (en-tête, menu mobile, pied de page) : les liens « boutique.html?cat=… »
+     sont remplacés par les catégories cochées « menu » dans l'admin, dans leur ordre.
+     Les boutons de contenu (.btn, .tile) et « Promotions » ne bougent pas. */
+  function renderCategoryLinks() {
+    if (!CATS) return;
+    var menu = CATS.filter(function (c) { return c.in_menu; });
+    var groups = [];
+    $$('a[href^="boutique.html?cat="]').forEach(function (a) {
+      if (a.closest('.btn, .tile') || a.classList.contains('btn') || a.classList.contains('tile')) return;
+      if (a.getAttribute('href') === 'boutique.html?cat=promo') return;
+      var item = a.parentElement.tagName === 'LI' ? a.parentElement : a;
+      var g = null;
+      for (var i = 0; i < groups.length; i++) if (groups[i].parent === item.parentElement) g = groups[i];
+      if (!g) groups.push(g = { parent: item.parentElement, items: [] });
+      g.items.push(item);
+    });
+    groups.forEach(function (g) {
+      var model = g.items[0];
+      menu.forEach(function (c) {
+        var item = model.cloneNode(true);
+        var a = item.tagName === 'A' ? item : $('a', item);
+        a.setAttribute('href', 'boutique.html?cat=' + encodeURIComponent(c.slug));
+        a.textContent = c.name;
+        a.classList.remove('is-active');
+        g.parent.insertBefore(item, model);
+      });
+      g.items.forEach(function (it) { it.remove(); });
+    });
+  }
+
   function boot() {
+    if (DB && window.CONTENT) DB.applyContent(window.CONTENT);
+    renderCategoryLinks();
     initBar();
     initHeader();
     renderGrids();
@@ -611,6 +688,17 @@
     renderCart();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  // catalogue et réglages viennent de la base quand elle est branchée (db.js)
+  function start() {
+    var ready = DB ? DB.load(3000) : Promise.resolve(false);
+    ready.then(function () {
+      PRODUCTS = window.PRODUCTS || PRODUCTS;
+      STORE = window.STORE_CONFIG || STORE;
+      CATS = window.CATEGORIES || null;
+      boot();
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 })();

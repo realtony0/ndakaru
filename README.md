@@ -26,6 +26,15 @@ depuis `data/products.js`, pas via `fetch`, donc pas de blocage `file://`.
 Déposer le dossier tel quel chez n'importe quel hébergeur statique
 (Hostinger, Netlify, Vercel, GitHub Pages, cPanel…). Aucune configuration serveur.
 
+## Admin et base de données
+
+L’admin se trouve sur `/admin/` (non indexé, accès par email + mot de passe). Il gère commandes,
+produits, clients, messages, newsletter et réglages, et s’appuie sur Supabase.
+Mise en route pas à pas : **`supabase/README.md`**.
+
+Tant que la clé n’est pas renseignée dans `assets/js/db.js`, le site fonctionne exactement comme
+avant, sur `data/products.js`.
+
 ## Structure
 
 ```
@@ -34,6 +43,8 @@ boutique.html     grille + filtres (tout / gaïndé / t-shirts / hoodies / promo
 produit.html      fiche produit, lue via ?p=<slug>
 marque.html       histoire de la marque + galerie
 contact.html      coordonnées, livraison, échanges, formulaire
+admin/            administration (tableau de bord, commandes, produits, clients…)
+supabase/         schéma de la base, données de départ, guide de mise en route
 
 data/products.json  source lisible des 17 produits
 data/products.js    même contenu, injecté dans window.PRODUCTS (utilisé par le site)
@@ -41,6 +52,7 @@ data/products.js    même contenu, injecté dans window.PRODUCTS (utilisé par l
 assets/css/style.css  toute la mise en forme
 assets/js/config.js   coordonnées, réseaux, messages de la barre d'annonce
 assets/js/app.js      panier, tiroir, recherche, filtres, fiche produit
+assets/js/db.js       liaison avec Supabase (catalogue, commandes, messages, newsletter)
 assets/img/products/  visuels produits
 assets/img/site/      photos lookbook et bandeaux
 ```

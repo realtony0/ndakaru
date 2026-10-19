@@ -656,7 +656,7 @@
           '</div></div>' +
           '<div class="card"><div class="card__head"><h2>Client</h2></div><div class="card__body"><div class="fields fields--2">' +
             '<label class="field"><span>Nom</span><input class="input" name="customer_name" value="' + esc(o.customer_name) + '" maxlength="160"></label>' +
-            '<label class="field"><span>Téléphone</span><input class="input" name="customer_phone" type="tel" value="' + esc(o.customer_phone) + '" placeholder="77 123 45 67" maxlength="40"></label>' +
+            '<label class="field"><span>Téléphone</span><input class="input" name="customer_phone" type="tel" value="' + esc(o.customer_phone) + '" placeholder="Numéro du client" maxlength="40"></label>' +
           '</div><label class="field" style="margin-top:14px"><span>Adresse de livraison</span><textarea class="textarea" name="address" rows="2" style="min-height:64px" maxlength="400">' + esc(o.address) + '</textarea></label></div></div>' +
           '<div class="card"><div class="card__head"><h2>Notes internes</h2></div><div class="card__body">' +
             '<textarea class="textarea" name="notes" placeholder="Visibles seulement dans l’admin" maxlength="2000">' + esc(o.notes) + '</textarea></div></div>' +

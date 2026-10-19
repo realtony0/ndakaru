@@ -151,9 +151,13 @@ window.NDK_SUPABASE = {
     newRef: newRef,
     toProduct: toProduct,
     applyContent: applyContent,
-    saveOrder: function (ref, lines) {
+    saveOrder: function (ref, lines, who) {
+      who = who || {};
       return insert('orders', {
         ref: ref,
+        customer_name: (who.name || '').slice(0, 160),
+        customer_phone: (who.phone || '').slice(0, 40),
+        address: (who.address || '').slice(0, 400),
         lines: lines.map(function (l) {
           return { slug: l.slug, title: l.title, size: l.size, color: l.color, qty: l.qty, price: l.price };
         })

@@ -168,9 +168,12 @@
     if (total) total.textContent = money(cartTotal());
     var checkout = $('[data-checkout]');
     if (checkout) checkout.disabled = !cart.length;
+    var who = $('[data-who]');
+    if (who) who.hidden = !cart.length;
   }
 
-  function checkoutMessage(ref) {
+  function checkoutMessage(ref, who) {
+    who = who || {};
     var lines = cart.map(function (l) {
       return '• ' + l.title + ' — ' + l.color + ' / ' + l.size + ' × ' + l.qty + ' = ' + money(l.price * l.qty);
     });
@@ -178,7 +181,7 @@
       (ref ? 'Réf. commande : ' + ref + '\n\n' : '') +
       lines.join('\n') +
       '\n\nTotal : ' + money(cartTotal()) +
-      '\n\nNom :\nAdresse de livraison :';
+      '\n\nNom : ' + (who.name || '') + '\nTéléphone : ' + (who.phone || '') + '\nAdresse de livraison : ' + (who.address || '');
   }
 
   /* ---------------------------------------------------------------- toast */
@@ -477,7 +480,8 @@
     $('[data-buy]').addEventListener('click', function () {
       if (!requireSize()) return;
       addToCart(p, sel.size, sel.color, 1);
-      goCheckout();
+      showPanel($('[data-cart-drawer]'));
+      focusCheckout();
     });
 
     $$('[data-related]').forEach(function (el) { el.setAttribute('data-exclude', p.slug); });
@@ -485,14 +489,76 @@
 
   /* ------------------------------------------------------------- checkout */
 
+  /* Coordonnées du client, demandées dans le panier : la commande arrive dans
+     l'admin avec un numéro à rappeler, même si le message WhatsApp n'est
+     jamais envoyé. Gardées dans le navigateur pour la commande suivante. */
+  var WHO_KEY = 'mbedum_customer_v1';
+
+  function initCheckout() {
+    var foot = $('.drawer__foot');
+    if (!foot || $('[data-who]', foot)) return;
+    var who = {};
+    try { who = JSON.parse(localStorage.getItem(WHO_KEY)) || {}; } catch (e) {}
+    var box = document.createElement('div');
+    box.className = 'checkout form--light';
+    box.setAttribute('data-who', '');
+    box.innerHTML =
+      '<input class="field" name="name" autocomplete="name" placeholder="Nom et prénom" value="' + esc(who.name || '') + '">' +
+      '<input class="field" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Téléphone (WhatsApp)" value="' + esc(who.phone || '') + '">' +
+      '<input class="field" name="address" autocomplete="street-address" placeholder="Quartier / adresse de livraison" value="' + esc(who.address || '') + '">' +
+      '<p class="checkout__error" data-who-error></p>';
+    foot.insertBefore(box, $('[data-checkout]', foot));
+  }
+
+  function readWho() {
+    var box = $('[data-who]');
+    if (!box) return { ok: true };
+    var who = {
+      name: $('[name=name]', box).value.trim(),
+      phone: $('[name=phone]', box).value.trim(),
+      address: $('[name=address]', box).value.trim()
+    };
+    var err = !who.name ? ['name', 'Indiquez votre nom.']
+      : who.phone.replace(/\D/g, '').length < 9 ? ['phone', 'Indiquez un numéro de téléphone valide.']
+      : !who.address ? ['address', 'Indiquez votre quartier ou adresse de livraison.'] : null;
+    $('[data-who-error]').textContent = err ? err[1] : '';
+    if (err) { $('[name=' + err[0] + ']', box).focus(); return { ok: false }; }
+    try { localStorage.setItem(WHO_KEY, JSON.stringify(who)); } catch (e) {}
+    who.ok = true;
+    return who;
+  }
+
+  function focusCheckout() {
+    var box = $('[data-who]');
+    if (!box) return;
+    var empty = $$('input', box).filter(function (i) { return !i.value.trim(); })[0];
+    if (empty) setTimeout(function () { empty.focus(); }, 300);
+  }
+
   function goCheckout() {
     if (!cart.length) return;
+    var who = readWho();
+    if (!who.ok) { showPanel($('[data-cart-drawer]')); return; }
     // la référence relie le message WhatsApp à la commande enregistrée dans l'admin
     var ref = DB && DB.enabled ? DB.newRef() : '';
-    if (ref) DB.saveOrder(ref, cart);
+    if (ref) DB.saveOrder(ref, cart, who);
     var phone = (STORE.whatsapp || '').replace(/[^0-9]/g, '');
-    var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(checkoutMessage(ref));
+    var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(checkoutMessage(ref, who));
+    var total = money(cartTotal());
     window.open(url, '_blank', 'noopener');
+    cart = [];
+    saveCart();
+    /* confirmation avec un vrai lien : si l'ouverture automatique a été bloquée
+       (navigateur d'Instagram, de TikTok…), le client n'a qu'à toucher le bouton */
+    var body = $('[data-cart-body]');
+    if (body) body.innerHTML =
+      '<div class="checkout-done">' +
+        '<p class="checkout-done__title">Merci ' + esc(who.name.split(' ')[0]) + ' !</p>' +
+        '<p>Votre commande' + (ref ? ' <strong>' + ref + '</strong>' : '') + ' de ' + total + ' est enregistrée.</p>' +
+        '<p>Envoyez le récapitulatif sur WhatsApp pour la confirmer. Nous vous recontactons aussi au <span style="white-space:nowrap">' + esc(who.phone) + '</span>.</p>' +
+        '<a class="btn btn--wide" href="' + esc(url) + '" target="_blank" rel="noopener">Envoyer sur WhatsApp</a>' +
+      '</div>';
+    showPanel($('[data-cart-drawer]'));
   }
 
   /* --------------------------------------------------------------- search */
@@ -674,6 +740,7 @@
 
   function boot() {
     if (DB && window.CONTENT) DB.applyContent(window.CONTENT);
+    initCheckout();
     renderCategoryLinks();
     initBar();
     initHeader();
